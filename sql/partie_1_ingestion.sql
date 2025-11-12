@@ -8,7 +8,8 @@ SELECT
 FROM orders
 GROUP BY id
 HAVING COUNT(*) > 1
-ORDER BY nb_occurences DESC;
+ORDER BY nb_occurences DESC
+LIMIT 10;
 
 
 -- Second step. On vérifie la présence de valeurs nulls
@@ -42,7 +43,8 @@ WHERE ROWID IN (
         FROM orders
     )
     WHERE rn = 1
-);
+)
+LIMIT 10;
 
 --- Question 4 - Faites de même avec la table order_items
 -- D'abord, on va vérifier les doublons
@@ -57,7 +59,7 @@ LIMIT 10;
 
 
 -- Requête nous permettant d'avoir 1 ligne par id et création de la table 'order_item_clean' au passage
-DROP VIEW IF EXISTS order_items_clean
+DROP VIEW IF EXISTS order_items_clean;
 CREATE VIEW order_items_clean AS
 SELECT *
 FROM order_items
@@ -104,7 +106,8 @@ FROM orders_clean
 WHERE shipping_country NOT IN ('FR', 'DE', 'IT', 'ES', 'BE')
    OR shipping_country IS NULL
 GROUP BY shipping_country
-ORDER BY nb_commandes DESC;
+ORDER BY nb_commandes DESC
+LIMIT 10;
 
 
 -- Requete 2: Statistiques globales par statut de validation
@@ -118,7 +121,8 @@ SELECT
     ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM orders_clean), 2) as pourcentage
 FROM orders_clean
 GROUP BY statut_validation
-ORDER BY nb_commandes DESC;
+ORDER BY nb_commandes DESC
+LIMIT 10;
 
 -- Requete 3: Distribution par pays valide
 SELECT
@@ -128,5 +132,6 @@ SELECT
 FROM orders_clean
 WHERE shipping_country IN ('FR', 'DE', 'IT', 'ES', 'BE')
 GROUP BY shipping_country
-ORDER BY nb_commandes DESC;
+ORDER BY nb_commandes DESC
+LIMIT 10;
 

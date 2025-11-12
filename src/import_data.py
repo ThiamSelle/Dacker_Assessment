@@ -5,7 +5,7 @@ from pathlib import Path
 # Configuration des chemins
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
-DB_PATH = ROOT / "dacker.db"
+DB_PATH = DATA_DIR / "dacker.db"
 
 csv_files = ["attribution", "campaigns", "charges", "order_items", "orders", "products" ]
 con = sqlite3.connect(DB_PATH)
