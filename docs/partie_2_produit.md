@@ -5,7 +5,7 @@ La première analyse vise à obtenir une vue d'ensemble des performances de chaq
 Pour ce faire, j'ai construit une requête qui calcule pour chaque produit la quantité totale vendue, le revenu total généré, 
 le prix moyen de vente, le nombre de clients distincts ayant acheté ce produit, ainsi que la date de première vente.
 
---- Methodology 
+# Methodology 
 J'ai choisi de partir de la table order_items_clean plutôt que de products car cette analyse se concentre sur les produits qui ont effectivement généré des ventes. 
 Cette approche permet d'éviter l'affichage de produits jamais vendus avec des valeurs NULL, ce qui rendrait l'analyse moins pertinente. 
 En partant des items de commande, nous nous assurons que chaque ligne du résultat correspond à un produit ayant participé au chiffre d'affaires de l'entreprise.
@@ -14,7 +14,7 @@ Les jointures sont structurées de manière cohérente avec cet objectif. La joi
 J'ai utilisé un JOIN standard car chaque ligne de order_items_clean doit correspondre à une commande valide. La jointure avec products utilise un LEFT JOIN par précaution, au cas où un product_id présent dans les commandes ne correspondrait à aucune ligne dans la table produits. 
 Cette approche garantit qu'aucune vente ne sera exclue de l'analyse. 
 
---- Resultats et Analyse 
+# Resultats et Analyse 
 L'analyse révèle un catalogue équilibrée. Le Cap arrive en tête avec un revenu total de 63 512.29€, suivi de près par le Dacker Mug avec 62 470.67€ et le Notebook avec 61 955.90€. 
 La fourchette de revenus s'étend de 52 661.87€ pour le Black Hoodie jusqu'au Cap en première position, soit un écart de seulement 17% entre le produit le moins performant et le leader. 
 --> Cette homogénéité est un signe de bonne santé du catalogue car elle indique qu'aucun produit ne domine de manière écrasante et que l'entreprise ne dépend pas excessivement d'un seul article pour générer son chiffre d'affaires.
@@ -47,7 +47,7 @@ Cette analyse vise à identifier pour chaque produit le marché où il performe 
 Cette information permet d'adapter les campagnes publicitaires par pays, d'optimiser la gestion des stocks dans les différents entrepôts, 
 et de comprendre les préférences locales qui peuvent guider le développement de produits futurs.
 
---- Methodology 
+# Methodology 
 Cette requête adopte une approche en deux étapes via l'utilisation de CTE. 
 Cette construction améliore considérablement la lisibilité du code et facilite la maintenance future. 
 La première CTE calcule les ventes agrégées par produit et par pays, établissant ainsi la base de données nécessaire à l'analyse. 
@@ -64,7 +64,7 @@ Le tri principal se fait évidemment sur la quantité vendue en ordre décroissa
 --> Si deux pays avaient exactement la même quantité vendue pour un produit donné, le tri alphabétique permettrait de toujours sélectionner le même pays de manière prévisible.
 
 
---- Resultats et Analyse
+# Resultats et Analyse
 Les résultats révèlent une géographie des ventes riches en enseignements stratégiques. 
 
 Le Notebook domine les ventes en Allemagne avec 252 unités, ce qui représente 26.5% de ses ventes totales de 952 unités. 
@@ -105,7 +105,7 @@ Au-delà de l'analyse du revenu total qui identifie les produits rapportant le p
 Cette distinction est fondamentale car un produit peut avoir un revenu total élevé simplement parce qu'il est commandé très souvent en petites quantités, tandis qu'un autre produit peut générer énormément de valeur à chaque fois qu'il apparaît dans un panier, même s'il est commandé moins fréquemment. 
 Cette seconde catégorie représente les produits premium qui offrent les meilleures opportunités de rentabilité.
 
---- Methodology 
+# Methodology 
 Cette requête se concentre spécifiquement sur le revenu moyen par commande, une métrique fondamentalement différente du revenu total analysé dans la Question 1. 
 Le calcul SUM(quantity * unit_price) / COUNT(DISTINCT order_id) détermine combien d'euros, en moyenne, ce produit génère à chaque fois qu'il apparaît dans une commande. 
 Cette métrique peut être élevée pour plusieurs raisons qui ne s'excluent pas mutuellement. 
@@ -118,7 +118,7 @@ L'utilisation de COUNT(DISTINCT order_id) plutôt qu'un simple décompte de lign
 --> Le tri par revenu moyen par commande décroissant permet d'identifier immédiatement les produits qui maximisent la valeur de chaque transaction. 
 --> La limitation à trois résultats via LIMIT 3 répond directement à la question posée, mais cette restriction cache potentiellement des insights intéressants sur le reste du catalogue que nous aborderons dans l'analyse comparative.
 
---Résultats et analyse du podium
+# Résultats et analyse du podium
 Le Cap conquiert la première place avec un revenu moyen par commande de 197.86€, réalisant ainsi un doublé remarquable en étant simultanément le leader en revenu total absolu et en revenu par commande. 
 --> Cette double performance est exceptionnelle car elle est rare dans les catalogues e-commerce. 
 --> Habituellement, les produits qui génèrent le plus de revenu total le font soit par un volume de commandes très élevé avec des paniers modestes, soit par des commandes peu nombreuses mais à très forte valeur. 
