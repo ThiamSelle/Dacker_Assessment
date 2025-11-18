@@ -1,41 +1,41 @@
-product_id,product_name,category,pays,nb_commandes,quantite_totale,revenu_total
-A12,"Blue T-shirt",Apparel,ES,66,199,13421.54
-A12,"Blue T-shirt",Apparel,BE,62,208,13276.73
-A12,"Blue T-shirt",Apparel,DE,60,182,11987.08
-A12,"Blue T-shirt",Apparel,FR,68,184,11698.92
-A12,"Blue T-shirt",Apparel,IT,62,175,10509.83
-B44,Cap,Apparel,FR,69,224,14380.78
-B44,Cap,Apparel,IT,72,210,13675.64
-B44,Cap,Apparel,ES,66,195,12563.94
-B44,Cap,Apparel,BE,58,178,12091.11
-B44,Cap,Apparel,DE,55,163,10329.14
-C01,"Dacker Mug",Goodies,IT,78,232,14744.35
-C01,"Dacker Mug",Goodies,ES,68,209,13042.31
-C01,"Dacker Mug",Goodies,DE,71,204,12981.46
-C01,"Dacker Mug",Goodies,BE,59,197,11716.82
-C01,"Dacker Mug",Goodies,FR,57,163,9985.73
-D22,"Metal Bottle",Goodies,ES,78,239,14970.7
-D22,"Metal Bottle",Goodies,FR,67,198,13478.48
-D22,"Metal Bottle",Goodies,IT,67,209,13369.63
-D22,"Metal Bottle",Goodies,DE,69,200,10611.41
-D22,"Metal Bottle",Goodies,BE,44,124,8659.33
-E13,"Black Hoodie",Apparel,FR,65,191,12293.72
-E13,"Black Hoodie",Apparel,DE,69,194,10679.31
-E13,"Black Hoodie",Apparel,ES,68,187,10540.73
-E13,"Black Hoodie",Apparel,IT,56,175,9923.63
-E13,"Black Hoodie",Apparel,BE,45,143,9224.48
-F99,"Sticker Pack",Accessories,DE,62,189,13810.26
-F99,"Sticker Pack",Accessories,IT,61,167,11392.77
-F99,"Sticker Pack",Accessories,FR,62,184,11349.58
-F99,"Sticker Pack",Accessories,BE,56,167,11317.8
-F99,"Sticker Pack",Accessories,ES,68,180,11013.46
-G88,Socks,Apparel,FR,70,223,14672.98
-G88,Socks,Apparel,IT,64,195,12767.56
-G88,Socks,Apparel,ES,68,195,11616.45
-G88,Socks,Apparel,DE,62,181,11594.81
-G88,Socks,Apparel,BE,56,169,10386.45
-H77,Notebook,Stationery,DE,75,252,15689.11
-H77,Notebook,Stationery,IT,61,190,12268.12
-H77,Notebook,Stationery,FR,59,165,12035.76
-H77,Notebook,Stationery,BE,60,176,11736.18
-H77,Notebook,Stationery,ES,59,167,10015.59
+product_id,product_name,category,pays,nb_commandes,quantite_totale,revenu_total,panier_moyen
+A12,"Blue T-shirt",Apparel,ES,56,174,11515.3,171.87
+A12,"Blue T-shirt",Apparel,FR,63,170,10780.74,149.73
+A12,"Blue T-shirt",Apparel,BE,48,162,10346.74,172.45
+A12,"Blue T-shirt",Apparel,DE,51,158,10132.2,166.1
+A12,"Blue T-shirt",Apparel,IT,53,156,9287.61,152.26
+B44,Cap,Apparel,FR,63,210,13623.12,162.18
+B44,Cap,Apparel,IT,64,186,12212.51,162.83
+B44,Cap,Apparel,ES,56,170,11138.88,171.37
+B44,Cap,Apparel,BE,47,148,10112.55,177.41
+B44,Cap,Apparel,DE,45,121,7561.78,142.68
+C01,"Dacker Mug",Goodies,IT,68,198,12725.23,153.32
+C01,"Dacker Mug",Goodies,ES,61,184,11629.29,161.52
+C01,"Dacker Mug",Goodies,DE,62,180,11375.15,149.67
+C01,"Dacker Mug",Goodies,BE,49,169,10189.93,161.74
+C01,"Dacker Mug",Goodies,FR,49,137,8076.66,139.25
+D22,"Metal Bottle",Goodies,ES,67,193,13001.75,171.08
+D22,"Metal Bottle",Goodies,FR,62,185,12969.77,182.67
+D22,"Metal Bottle",Goodies,IT,57,177,11288.39,171.04
+D22,"Metal Bottle",Goodies,DE,54,166,8703.7,133.9
+D22,"Metal Bottle",Goodies,BE,40,114,8035.66,174.69
+E13,"Black Hoodie",Apparel,FR,57,166,10979.01,154.63
+E13,"Black Hoodie",Apparel,DE,60,171,9208.94,131.56
+E13,"Black Hoodie",Apparel,ES,59,164,9032.36,148.07
+E13,"Black Hoodie",Apparel,IT,49,145,7856.39,142.84
+E13,"Black Hoodie",Apparel,BE,35,110,7434.7,165.22
+F99,"Sticker Pack",Accessories,DE,52,160,11244.47,187.41
+F99,"Sticker Pack",Accessories,FR,59,178,11040.74,155.5
+F99,"Sticker Pack",Accessories,IT,52,145,10256.33,183.15
+F99,"Sticker Pack",Accessories,BE,49,151,10145.31,181.17
+F99,"Sticker Pack",Accessories,ES,61,162,9807.95,144.23
+G88,Socks,Apparel,FR,65,210,13991.59,179.38
+G88,Socks,Apparel,IT,56,164,10736.84,165.18
+G88,Socks,Apparel,ES,57,170,10462.36,147.36
+G88,Socks,Apparel,DE,53,146,9444.06,149.91
+G88,Socks,Apparel,BE,48,145,8663.74,157.52
+H77,Notebook,Stationery,DE,64,216,13283.5,163.99
+H77,Notebook,Stationery,IT,54,175,11423.79,173.09
+H77,Notebook,Stationery,FR,54,147,10940.3,176.46
+H77,Notebook,Stationery,BE,48,134,9294.16,172.11
+H77,Notebook,Stationery,ES,49,137,8003.08,145.51
