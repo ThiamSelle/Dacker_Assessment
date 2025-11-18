@@ -2,102 +2,201 @@
 .headers on
 .width 20 15 10 10
 
--- ========================================
--- LISTE DES TABLES
--- ========================================
-.print "===== TABLES ET VUES DISPONIBLES ====="
-SELECT name, type FROM sqlite_master
-WHERE type IN ('table', 'view')
-ORDER BY type, name;
 
--- ========================================
--- PRODUCTS
--- ========================================
+-- ====================================================================
+-- EXPLORATION DES TABLES
+-- ====================================================================
+
 .print ""
-.print "========================================="
+.print "========================================"
+.print "LISTE DES TABLES"
+.print "========================================"
+.print ""
+
+SELECT name, type
+FROM sqlite_master
+WHERE type IN ('table', 'view')
+ORDER BY name;
+
+.print ""
+.print ""
+
+
+-- ====================================================================
+-- TABLE: PRODUCTS
+-- ====================================================================
+
+.print ""
+.print "========================================"
 .print "TABLE: PRODUCTS"
-.print "========================================="
+.print "========================================"
+.print ""
+
+.print "Structure de la table :"
+.print ""
 PRAGMA table_info(products);
-SELECT COUNT(*) as total_lignes FROM products;
+
+.print ""
+.print ""
+.print "Nombre total de lignes :"
+.print ""
+SELECT COUNT(*) as total_rows FROM products;
+
+.print ""
+.print ""
+.print "Apercu des donnees :"
+.print ""
 SELECT * FROM products;
 
--- ========================================
--- CAMPAIGNS
--- ========================================
 .print ""
-.print "========================================="
+.print ""
+
+
+-- ====================================================================
+-- TABLE: CAMPAIGNS
+-- ====================================================================
+
+.print ""
+.print "========================================"
 .print "TABLE: CAMPAIGNS"
-.print "========================================="
+.print "========================================"
+.print ""
+
+.print "Structure de la table :"
+.print ""
 PRAGMA table_info(campaigns);
-SELECT COUNT(*) as total_lignes FROM campaigns;
+
+.print ""
+.print ""
+.print "Nombre total de lignes :"
+.print ""
+SELECT COUNT(*) as total_rows FROM campaigns;
+
+.print ""
+.print ""
+.print "Apercu des donnees :"
+.print ""
 SELECT * FROM campaigns;
 
--- ========================================
--- ATTRIBUTION
--- ========================================
 .print ""
-.print "========================================="
-.print "TABLE: ATTRIBUTION"
-.print "========================================="
-PRAGMA table_info(attribution);
-SELECT COUNT(*) as total_lignes FROM attribution;
-SELECT * FROM attribution LIMIT 10;
+.print ""
 
--- ========================================
--- CHARGES
--- ========================================
-.print ""
-.print "========================================="
-.print "TABLE: CHARGES"
-.print "========================================="
-PRAGMA table_info(charges);
-SELECT COUNT(*) as total_lignes FROM charges;
-SELECT * FROM charges LIMIT 10;
 
--- ========================================
--- ORDERS (original)
--- ========================================
+-- ====================================================================
+-- TABLE: ORDERS
+-- ====================================================================
+
 .print ""
-.print "========================================="
+.print "========================================"
 .print "TABLE: ORDERS"
-.print "========================================="
+.print "========================================"
+.print ""
+
+.print "Structure de la table :"
+.print ""
 PRAGMA table_info(orders);
-SELECT COUNT(*) as total_lignes FROM orders;
+
+.print ""
+.print ""
+.print "Nombre total de lignes :"
+.print ""
+SELECT COUNT(*) as total_rows FROM orders;
+
+.print ""
+.print ""
+.print "Apercu des donnees:"
+.print ""
 SELECT * FROM orders LIMIT 5;
 
--- ========================================
--- ORDERS_CLEAN
--- ========================================
 .print ""
-.print "========================================="
-.print "VUE: ORDERS_CLEAN"
-.print "========================================="
-.print "Structure (identique à orders):"
-PRAGMA table_info(orders);
 .print ""
-SELECT COUNT(*) as total_lignes FROM orders_clean;
-SELECT * FROM orders_clean LIMIT 5;
 
--- ========================================
--- ORDER_ITEMS (original)
--- ========================================
+
+-- ====================================================================
+-- TABLE: ORDER_ITEMS
+-- ====================================================================
+
 .print ""
-.print "========================================="
+.print "========================================"
 .print "TABLE: ORDER_ITEMS"
-.print "========================================="
+.print "========================================"
+.print ""
+
+.print "Structure de la table :"
+.print ""
 PRAGMA table_info(order_items);
-SELECT COUNT(*) as total_lignes FROM order_items;
+
+.print ""
+.print ""
+.print "Nombre total de lignes :"
+.print ""
+SELECT COUNT(*) as total_rows FROM order_items;
+
+.print ""
+.print ""
+.print "Apercu des donnees:"
+.print ""
 SELECT * FROM order_items LIMIT 5;
 
--- ========================================
--- ORDER_ITEMS_CLEAN
--- ========================================
 .print ""
-.print "========================================="
-.print "VUE: ORDER_ITEMS_CLEAN"
-.print "========================================="
-.print "Structure (identique à order_items):"
-PRAGMA table_info(order_items);
 .print ""
-SELECT COUNT(*) as total_lignes FROM order_items_clean;
-SELECT * FROM order_items_clean LIMIT 5;
+
+
+-- ====================================================================
+-- TABLE: ATTRIBUTION
+-- ====================================================================
+
+.print ""
+.print "========================================"
+.print "TABLE: ATTRIBUTION"
+.print "========================================"
+.print ""
+
+.print "Structure de la table :"
+.print ""
+PRAGMA table_info(attribution);
+
+.print ""
+.print ""
+.print "Nombre total de lignes :"
+.print ""
+SELECT COUNT(*) as total_rows FROM attribution;
+
+.print ""
+.print ""
+.print "Apercu des donnees:"
+.print ""
+SELECT * FROM attribution LIMIT 5;
+
+.print ""
+.print ""
+
+
+-- ====================================================================
+-- TABLE: CHARGES
+-- ====================================================================
+
+.print ""
+.print "========================================"
+.print "TABLE: CHARGES"
+.print "========================================"
+.print ""
+
+.print "Structure de la table :"
+.print ""
+PRAGMA table_info(charges);
+
+.print ""
+.print ""
+.print "Nombre total de lignes :"
+.print ""
+SELECT COUNT(*) as total_rows FROM charges;
+
+.print ""
+.print ""
+.print "Apercu des donnees:"
+.print ""
+SELECT * FROM charges LIMIT 5;
+
+.print ""
+.print ""

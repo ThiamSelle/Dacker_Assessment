@@ -1,6 +1,21 @@
+-- PARTIE 4 - Cohortes & Lifetime Values
+.mode column
+.headers on
+.width 12 15 15 12 15 15 12
 
--- PARTIE 4 - COHORTES & LIFETIME VALUE (LTV)
--- Question 1: Association de chaque commande avec la date de première commande du client
+
+-- ====================================================================
+-- QUESTION 1 : Association date première commande
+-- ====================================================================
+
+.print ""
+.print "========================================"
+.print "QUESTION 1 : Date première commande"
+.print "========================================"
+.print ""
+.print "Association de chaque commande avec la date de première commande du client"
+.print "Echantillon de 20 commandes"
+.print ""
 
 WITH first_order_dates AS (
     SELECT
@@ -15,9 +30,10 @@ SELECT
     o.created_at AS date_commande,
     o.status AS statut_commande,
     o.shipping_country,
-    ROUND(SUM(oi.quantity * oi.unit_price), 2) AS montant_commande,
+    ROUND(COALESCE(SUM(oi.quantity * oi.unit_price), 0), 2) AS montant_commande,
     fod.date_premiere_commande,
-    ROUND((JULIANDAY(o.created_at) - JULIANDAY(fod.date_premiere_commande)) / 30.0, 1) AS mois_depuis_premiere_commande
+    CAST((STRFTIME('%Y', o.created_at) - STRFTIME('%Y', fod.date_premiere_commande)) * 12 +
+         (STRFTIME('%m', o.created_at) - STRFTIME('%m', fod.date_premiere_commande)) AS INTEGER) AS mois_depuis_premiere_commande
 FROM orders_clean o
 JOIN first_order_dates fod ON o.customer_id = fod.customer_id
 LEFT JOIN order_items_clean oi ON o.id = oi.order_id
@@ -25,7 +41,21 @@ GROUP BY o.id, o.customer_id, o.created_at, o.status, o.shipping_country, fod.da
 ORDER BY o.customer_id, o.created_at
 LIMIT 20;
 
--- Question 2: Calcul de la LTV par cohorte mensuelle
+.print ""
+.print ""
+
+
+-- ====================================================================
+-- QUESTION 2 : LTV par cohorte mensuelle
+-- ====================================================================
+
+.print ""
+.print "========================================"
+.print "QUESTION 2 : LTV par cohorte"
+.print "========================================"
+.print ""
+.print "Evolution de la Lifetime Value cumulee par cohorte mensuelle"
+.print ""
 
 WITH first_order_dates AS (
     SELECT
@@ -43,7 +73,7 @@ orders_with_cohort AS (
         STRFTIME('%Y-%m', o.created_at) AS mois_commande,
         fod.date_premiere_commande,
         fod.cohorte_mois,
-        ROUND(SUM(oi.quantity * oi.unit_price), 2) AS montant_commande,
+        ROUND(COALESCE(SUM(oi.quantity * oi.unit_price), 0), 2) AS montant_commande,
         CAST((STRFTIME('%Y', o.created_at) - STRFTIME('%Y', fod.date_premiere_commande)) * 12 +
              (STRFTIME('%m', o.created_at) - STRFTIME('%m', fod.date_premiere_commande)) AS INTEGER) AS mois_depuis_acquisition
     FROM orders_clean o
@@ -75,7 +105,19 @@ SELECT
 FROM ltv_by_cohort_and_month
 ORDER BY premier_mois_achat, mois_depuis_premiere_commande;
 
--- Création de la table ltv_cohorts pour les analyses ultérieures
+.print ""
+.print ""
+
+
+-- ====================================================================
+-- CREATION TABLE ltv_cohorts
+-- ====================================================================
+
+.print ""
+.print "========================================"
+.print "CREATION TABLE ltv_cohorts"
+.print "========================================"
+.print ""
 
 DROP TABLE IF EXISTS ltv_cohorts;
 
@@ -96,7 +138,7 @@ orders_with_cohort AS (
         STRFTIME('%Y-%m', o.created_at) AS mois_commande,
         fod.date_premiere_commande,
         fod.cohorte_mois,
-        ROUND(SUM(oi.quantity * oi.unit_price), 2) AS montant_commande,
+        ROUND(COALESCE(SUM(oi.quantity * oi.unit_price), 0), 2) AS montant_commande,
         CAST((STRFTIME('%Y', o.created_at) - STRFTIME('%Y', fod.date_premiere_commande)) * 12 +
              (STRFTIME('%m', o.created_at) - STRFTIME('%m', fod.date_premiere_commande)) AS INTEGER) AS mois_depuis_acquisition
     FROM orders_clean o
@@ -127,3 +169,12 @@ SELECT
     ), 2) AS ltv_cumulee
 FROM ltv_by_cohort_and_month
 ORDER BY premier_mois_achat, mois_depuis_premiere_commande;
+
+.print ""
+.print "Table ltv_cohorts creee avec succes"
+.print ""
+
+SELECT COUNT(*) AS nb_lignes FROM ltv_cohorts;
+
+.print ""
+.print ""

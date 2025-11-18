@@ -1,26 +1,44 @@
-===== TABLES ET VUES DISPONIBLES =====
+
+========================================
+LISTE DES TABLES
+========================================
+
 name                  type           
 --------------------  ---------------
 attribution           table          
 campaigns             table          
 charges               table          
+ltv_cohorts           table          
 order_items           table          
-orders                table          
-products              table          
 order_items_clean     view           
+orders                table          
 orders_clean          view           
+products              table          
 
-=========================================
+
+
+========================================
 TABLE: PRODUCTS
-=========================================
+========================================
+
+Structure de la table :
+
 cid                   name             type        notnull     dflt_value  pk
 --------------------  ---------------  ----------  ----------  ----------  --
 0                     id               TEXT        0                       0 
 1                     name             TEXT        0                       0 
 2                     category         TEXT        0                       0 
-total_lignes        
+
+
+Nombre total de lignes :
+
+total_rows          
 --------------------
 8                   
+
+
+Apercu des donnees :
+
 id                    name             category  
 --------------------  ---------------  ----------
 A12                   Blue T-shirt     Apparel   
@@ -40,9 +58,14 @@ G88                   Socks            Apparel
 
 H77                   Notebook         Stationery
 
-=========================================
+
+
+========================================
 TABLE: CAMPAIGNS
-=========================================
+========================================
+
+Structure de la table :
+
 cid                   name             type        notnull     dflt_value  pk
 --------------------  ---------------  ----------  ----------  ----------  --
 0                     id               INTEGER     0                       0 
@@ -51,9 +74,17 @@ cid                   name             type        notnull     dflt_value  pk
 3                     end_date         TEXT        0                       0 
 4                     channel          TEXT        0                       0 
 5                     budget           INTEGER     0                       0 
-total_lignes        
+
+
+Nombre total de lignes :
+
+total_rows          
 --------------------
 4                   
+
+
+Apercu des donnees :
+
 id                    campaign_name    start_date  end_date    channel    budget
 --------------------  ---------------  ----------  ----------  ---------  ------
 1                     Spring Sale      2025-04-01  2025-04-30  Meta       5000  
@@ -61,16 +92,114 @@ id                    campaign_name    start_date  end_date    channel    budget
 3                     Back to School   2025-08-15  2025-09-15  TikTok     6000  
 4                     Flash Sale       2025-07-10  2025-07-15  Instagram  3000  
 
-=========================================
+
+
+========================================
+TABLE: ORDERS
+========================================
+
+Structure de la table :
+
+cid                   name             type        notnull     dflt_value  pk
+--------------------  ---------------  ----------  ----------  ----------  --
+0                     id               INTEGER     0                       0 
+
+1                     customer_id      INTEGER     0                       0 
+
+2                     created_at       TEXT        0                       0 
+
+3                     updated_at       TEXT        0                       0 
+
+4                     shipping_countr  TEXT        0                       0 
+                      y                                                      
+
+5                     status           TEXT        0                       0 
+
+
+Nombre total de lignes :
+
+total_rows          
+--------------------
+2294                
+
+
+Apercu des donnees:
+
+id                    customer_id      created_at  updated_at  shipping_country  status 
+--------------------  ---------------  ----------  ----------  ----------------  -------
+1                     1057             2025-04-05  2025-04-05  IT                open   
+                                        20:33:30    20:33:30                            
+
+1                     1057             2025-04-05  2025-04-06  IT                shipped
+                                        20:33:30    04:33:30                            
+
+2                     1287             2025-05-09  2025-05-09  BE                open   
+                                        14:39:02    14:39:02                            
+
+2                     1287             2025-05-09  2025-05-09  BE                shipped
+                                        14:39:02    23:39:02                            
+
+3                     1022             2025-06-29  2025-06-29  BE                open   
+                                        05:04:30    05:04:30                            
+
+
+
+========================================
+TABLE: ORDER_ITEMS
+========================================
+
+Structure de la table :
+
+cid                   name             type        notnull     dflt_value  pk
+--------------------  ---------------  ----------  ----------  ----------  --
+0                     id               INTEGER     0                       0 
+1                     order_id         INTEGER     0                       0 
+2                     product_id       TEXT        0                       0 
+3                     quantity         INTEGER     0                       0 
+4                     unit_price       REAL        0                       0 
+5                     updated_at       TEXT        0                       0 
+
+
+Nombre total de lignes :
+
+total_rows          
+--------------------
+6901                
+
+
+Apercu des donnees:
+
+id                    order_id         product_id  quantity    unit_price  updated_at         
+--------------------  ---------------  ----------  ----------  ----------  -------------------
+1                     1                D22         2           89.69       2025-04-06 04:33:30
+2                     1                B44         4           8.66        2025-04-06 04:33:30
+1                     1                D22         2           89.69       2025-04-06 04:33:30
+2                     1                B44         4           8.66        2025-04-06 04:33:30
+3                     2                D22         4           72.77       2025-05-09 23:39:02
+
+
+
+========================================
 TABLE: ATTRIBUTION
-=========================================
+========================================
+
+Structure de la table :
+
 cid                   name             type        notnull     dflt_value  pk
 --------------------  ---------------  ----------  ----------  ----------  --
 0                     order_id         INTEGER     0                       0 
 1                     campaign_id      INTEGER     0                       0 
-total_lignes        
+
+
+Nombre total de lignes :
+
+total_rows          
 --------------------
 916                 
+
+
+Apercu des donnees:
+
 order_id              campaign_id    
 --------------------  ---------------
 1                     1              
@@ -78,15 +207,15 @@ order_id              campaign_id
 3                     2              
 4                     1              
 4                     1              
-6                     2              
-6                     2              
-6                     2              
-7                     2              
-8                     1              
 
-=========================================
+
+
+========================================
 TABLE: CHARGES
-=========================================
+========================================
+
+Structure de la table :
+
 cid                   name             type        notnull     dflt_value  pk
 --------------------  ---------------  ----------  ----------  ----------  --
 0                     id               TEXT        0                       0 
@@ -107,9 +236,17 @@ cid                   name             type        notnull     dflt_value  pk
                       id                                                     
 
 8                     reason           TEXT        0                       0 
-total_lignes        
+
+
+Nombre total de lignes :
+
+total_rows          
 --------------------
 1078                
+
+
+Apercu des donnees:
+
 id                    order_id         type        status      amount  currency  created_at           related_charge_id  reason
 --------------------  ---------------  ----------  ----------  ------  --------  -------------------  -----------------  ------
 64f16a85-da9e-49c8-a  1                charge      succeeded   214.02  EUR       2025-04-05 20:41:30                           
@@ -127,139 +264,4 @@ e14bc855-8c94-4f49-a  3                charge      succeeded   68.48   EUR      
 2c01a53c-2b2d-4fcb-b  5                charge      succeeded   500.35  EUR       2025-05-04 05:49:50                           
 7a2-4d5cd00c0bf4                                                                                                               
 
-8e5f53c1-6aa3-4f7d-b  6                charge      succeeded   790.72  EUR       2025-06-01 02:39:18                           
-264-e691c0335abe                                                                                                               
 
-5d6e0e01-e02e-4868-b  7                charge      succeeded   294.12  EUR       2025-06-21 23:56:28                           
-7aa-09814dd97b6e                                                                                                               
-
-5bea83de-45a5-4f07-b  8                charge      succeeded   186.99  EUR       2025-04-23 07:12:59                           
-327-90830c2b3c0f                                                                                                               
-
-df56ee23-28cf-4a93-b  9                charge      succeeded   501.72  EUR       2025-04-30 16:46:57                           
-a00-ddea07bb2402                                                                                                               
-
-118a2a69-9d61-4016-b  10               charge      succeeded   652.6   EUR       2025-04-14 12:07:13                           
-096-dbb4cb2e92e7                                                                                                               
-
-=========================================
-TABLE: ORDERS
-=========================================
-cid                   name             type        notnull     dflt_value  pk
---------------------  ---------------  ----------  ----------  ----------  --
-0                     id               INTEGER     0                       0 
-
-1                     customer_id      INTEGER     0                       0 
-
-2                     created_at       TEXT        0                       0 
-
-3                     updated_at       TEXT        0                       0 
-
-4                     shipping_countr  TEXT        0                       0 
-                      y                                                      
-
-5                     status           TEXT        0                       0 
-total_lignes        
---------------------
-2294                
-id                    customer_id      created_at  updated_at  shipping_country  status 
---------------------  ---------------  ----------  ----------  ----------------  -------
-1                     1057             2025-04-05  2025-04-05  IT                open   
-                                        20:33:30    20:33:30                            
-
-1                     1057             2025-04-05  2025-04-06  IT                shipped
-                                        20:33:30    04:33:30                            
-
-2                     1287             2025-05-09  2025-05-09  BE                open   
-                                        14:39:02    14:39:02                            
-
-2                     1287             2025-05-09  2025-05-09  BE                shipped
-                                        14:39:02    23:39:02                            
-
-3                     1022             2025-06-29  2025-06-29  BE                open   
-                                        05:04:30    05:04:30                            
-
-=========================================
-VUE: ORDERS_CLEAN
-=========================================
-Structure (identique à orders):
-cid                   name             type        notnull     dflt_value  pk
---------------------  ---------------  ----------  ----------  ----------  --
-0                     id               INTEGER     0                       0 
-
-1                     customer_id      INTEGER     0                       0 
-
-2                     created_at       TEXT        0                       0 
-
-3                     updated_at       TEXT        0                       0 
-
-4                     shipping_countr  TEXT        0                       0 
-                      y                                                      
-
-5                     status           TEXT        0                       0 
-
-total_lignes        
---------------------
-1000                
-id                    customer_id      created_at  updated_at  shipping_country  status         
---------------------  ---------------  ----------  ----------  ----------------  ---------------
-1                     1057             2025-04-05  2025-04-06  IT                shipped        
-                                        20:33:30    04:33:30                                    
-
-2                     1287             2025-05-09  2025-05-09  BE                shipped        
-                                        14:39:02    23:39:02                                    
-
-3                     1022             2025-06-29  2025-06-30  BE                shipped        
-                                        05:04:30    05:04:30                                    
-
-4                     1148             2025-04-16  2025-04-19  DE                shipped        
-                                        11:51:27    22:51:27                                    
-
-5                     1036             2025-05-04  2025-05-08  BE                pending_payment
-                                        05:33:50    09:33:50                                    
-
-=========================================
-TABLE: ORDER_ITEMS
-=========================================
-cid                   name             type        notnull     dflt_value  pk
---------------------  ---------------  ----------  ----------  ----------  --
-0                     id               INTEGER     0                       0 
-1                     order_id         INTEGER     0                       0 
-2                     product_id       TEXT        0                       0 
-3                     quantity         INTEGER     0                       0 
-4                     unit_price       REAL        0                       0 
-5                     updated_at       TEXT        0                       0 
-total_lignes        
---------------------
-6901                
-id                    order_id         product_id  quantity    unit_price  updated_at         
---------------------  ---------------  ----------  ----------  ----------  -------------------
-1                     1                D22         2           89.69       2025-04-06 04:33:30
-2                     1                B44         4           8.66        2025-04-06 04:33:30
-1                     1                D22         2           89.69       2025-04-06 04:33:30
-2                     1                B44         4           8.66        2025-04-06 04:33:30
-3                     2                D22         4           72.77       2025-05-09 23:39:02
-
-=========================================
-VUE: ORDER_ITEMS_CLEAN
-=========================================
-Structure (identique à order_items):
-cid                   name             type        notnull     dflt_value  pk
---------------------  ---------------  ----------  ----------  ----------  --
-0                     id               INTEGER     0                       0 
-1                     order_id         INTEGER     0                       0 
-2                     product_id       TEXT        0                       0 
-3                     quantity         INTEGER     0                       0 
-4                     unit_price       REAL        0                       0 
-5                     updated_at       TEXT        0                       0 
-
-total_lignes        
---------------------
-3009                
-id                    order_id         product_id  quantity    unit_price  updated_at         
---------------------  ---------------  ----------  ----------  ----------  -------------------
-1                     1                D22         2           89.69       2025-04-06 04:33:30
-2                     1                B44         4           8.66        2025-04-06 04:33:30
-3                     2                D22         4           72.77       2025-05-09 23:39:02
-4                     2                A12         2           85.29       2025-05-09 23:39:02
-5                     2                F99         3           22.88       2025-05-09 23:39:02

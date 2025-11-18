@@ -1,5 +1,21 @@
 ----- Partie 3 : Réconciliation paiement
--- Question 1: Comparaison montant commande vs transactions bancaires
+.mode column
+.headers on
+.width 12 15 15 12 15 15 12 12 15 20
+
+
+-- ====================================================================
+-- QUESTION 1 : Réconciliation commande vs paiements
+-- ====================================================================
+
+.print ""
+.print "========================================"
+.print "QUESTION 1 : Réconciliation paiements"
+.print "========================================"
+.print ""
+.print "Comparaison montant commande vs charges bancaires"
+.print "Top 20 commandes avec les plus gros ecarts"
+.print ""
 
 WITH order_amounts AS (
     SELECT
@@ -7,11 +23,12 @@ WITH order_amounts AS (
         o.customer_id,
         o.shipping_country,
         o.status,
-        ROUND(SUM(oi.quantity * oi.unit_price), 2) AS montant_commande
+        ROUND(COALESCE(SUM(oi.quantity * oi.unit_price), 0), 2) AS montant_commande
     FROM orders_clean o
     LEFT JOIN order_items_clean oi ON o.id = oi.order_id
     GROUP BY o.id, o.customer_id, o.shipping_country, o.status
 ),
+
 charge_amounts AS (
     SELECT
         order_id,
@@ -22,6 +39,7 @@ charge_amounts AS (
     FROM charges
     GROUP BY order_id
 )
+
 SELECT
     oa.order_id,
     oa.customer_id,
@@ -39,7 +57,7 @@ SELECT
                 ((oa.montant_commande - COALESCE(ca.montant_charges_total, 0)) / oa.montant_commande) * 100
             ELSE 0
         END,
-    2) AS difference_pourcentage,
+    2) AS difference_pct,
     CASE
         WHEN oa.montant_commande = COALESCE(ca.montant_charges_total, 0) THEN 'OK'
         WHEN COALESCE(ca.montant_charges_total, 0) = 0 THEN 'AUCUN_PAIEMENT'
@@ -49,13 +67,23 @@ SELECT
 FROM order_amounts oa
 LEFT JOIN charge_amounts ca ON oa.order_id = ca.order_id
 ORDER BY ABS(oa.montant_commande - COALESCE(ca.montant_charges_total, 0)) DESC
-LIMIT 20;
+LIMIT 25;
+
+.print ""
+.print ""
 
 
--- Question 2: Extra investigation de la réconciliation
+-- ====================================================================
+-- QUESTION 2a : Distribution par statut de réconciliation
+-- ====================================================================
 
--- Question 2a: Analyse globale de la réconciliation
--- Distribution des commandes par statut de réconciliation
+.print ""
+.print "========================================"
+.print "QUESTION 2a : Distribution globale"
+.print "========================================"
+.print ""
+.print "Repartition des commandes par statut de reconciliation"
+.print ""
 
 WITH order_amounts AS (
     SELECT
@@ -63,7 +91,7 @@ WITH order_amounts AS (
         o.customer_id,
         o.shipping_country,
         o.status,
-        ROUND(SUM(oi.quantity * oi.unit_price), 2) AS montant_commande
+        ROUND(COALESCE(SUM(oi.quantity * oi.unit_price), 0), 2) AS montant_commande
     FROM orders_clean o
     LEFT JOIN order_items_clean oi ON o.id = oi.order_id
     GROUP BY o.id, o.customer_id, o.shipping_country, o.status
@@ -115,8 +143,21 @@ FROM reconciliation_complete
 GROUP BY statut_reconciliation
 ORDER BY nb_commandes DESC;
 
--- Question 2b: Analyse croisée par statut de commande et statut de réconciliation
--- Identifier si certains statuts de commande sont plus affectés
+.print ""
+.print ""
+
+
+-- ====================================================================
+-- QUESTION 2b : Analyse croisée statut commande vs réconciliation
+-- ====================================================================
+
+.print ""
+.print "========================================"
+.print "QUESTION 2b : Croisement statuts"
+.print "========================================"
+.print ""
+.print "Analyse par statut de commande et statut de reconciliation"
+.print ""
 
 WITH order_amounts AS (
     SELECT
@@ -124,7 +165,7 @@ WITH order_amounts AS (
         o.customer_id,
         o.shipping_country,
         o.status,
-        ROUND(SUM(oi.quantity * oi.unit_price), 2) AS montant_commande
+        ROUND(COALESCE(SUM(oi.quantity * oi.unit_price), 0), 2) AS montant_commande  -- COALESCE ajouté
     FROM orders_clean o
     LEFT JOIN order_items_clean oi ON o.id = oi.order_id
     GROUP BY o.id, o.customer_id, o.shipping_country, o.status
@@ -177,18 +218,33 @@ FROM reconciliation_complete
 GROUP BY statut_commande, statut_reconciliation
 ORDER BY statut_commande, nb_commandes DESC;
 
--- Question 2c: Investigation de la table charges
--- Vérifier si la table charges contient des données
+.print ""
+.print ""
+
+
+-- ====================================================================
+-- QUESTION 2c : Investigation de la table charges
+-- ====================================================================
+
+.print ""
+.print "========================================"
+.print "QUESTION 2c : Statistiques charges"
+.print "========================================"
+.print ""
+.print "Vue globale de la table charges"
+.print ""
 
 SELECT
     COUNT(DISTINCT order_id) AS commandes_avec_charges,
     COUNT(*) AS total_lignes_charges,
-    SUM(CASE WHEN status = 'succeeded' THEN 1 ELSE 0 END) AS charges_reussies,
-    SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) AS charges_echouees,
-    SUM(CASE WHEN type = 'charge' THEN 1 ELSE 0 END) AS nb_charges,
-    SUM(CASE WHEN type = 'refund' THEN 1 ELSE 0 END) AS nb_remboursements
+    SUM(CASE WHEN type = 'charge' THEN 1 ELSE 0 END) AS total_charges,
+    SUM(CASE WHEN type = 'refund' THEN 1 ELSE 0 END) AS total_refunds,
+    SUM(CASE WHEN type = 'charge' AND status = 'succeeded' THEN 1 ELSE 0 END) AS charges_reussies,
+    SUM(CASE WHEN type = 'charge' AND status = 'failed' THEN 1 ELSE 0 END) AS charges_echouees,
+    SUM(CASE WHEN type = 'refund' AND status = 'succeeded' THEN 1 ELSE 0 END) AS refunds_reussis,
+    ROUND(100.0 * SUM(CASE WHEN type = 'charge' AND status = 'succeeded' THEN 1 ELSE 0 END) /
+          NULLIF(SUM(CASE WHEN type = 'charge' THEN 1 ELSE 0 END), 0), 2) AS taux_reussite_paiements_pct
 FROM charges;
 
-
-
-
+.print ""
+.print ""

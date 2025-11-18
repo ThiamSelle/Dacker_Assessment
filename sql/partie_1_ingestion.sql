@@ -1,7 +1,21 @@
 ----- Partie 1 : Ingestion et Préparation
---- Question 2 : La colonne id de la table orders est-elle une clé primaire valide ? Pourquoi ?
+.mode column
+.headers on
+.width 20 15 12 10
 
--- First step. On vérifie la présence de doublons
+
+-- ====================================================================
+-- QUESTION 2 : La colonne id de la table orders est-elle une clé primaire valide ?
+-- ====================================================================
+
+.print ""
+.print "========================================"
+.print "QUESTION 2 : 'ID' est-elle une clé primaire valide ?"
+.print "========================================"
+.print ""
+
+.print "Etape 1 : Verification de la presence de doublons"
+.print ""
 SELECT
     id,
     COUNT(*) as nb_occurences
@@ -11,27 +25,41 @@ HAVING COUNT(*) > 1
 ORDER BY nb_occurences DESC
 LIMIT 10;
 
-
--- Second step. On vérifie la présence de valeurs nulls
+.print ""
+.print ""
+.print "Etape 2 : Verification des valeurs NULL"
+.print ""
 SELECT
     COUNT(*) AS null_id_numbers
 FROM orders
 WHERE id IS NULL;
 
-
--- Third step. On détermine le nomble de doublons
+.print ""
+.print ""
+.print "Etape 3 : Statistiques globales"
+.print ""
 SELECT
     COUNT(*) AS total_lignes,
     COUNT(DISTINCT id) AS nb_ids_distincts,
     COUNT(*) - COUNT(DISTINCT id) AS nb_doublons
 FROM orders;
 
+.print ""
+.print ""
 
---- Question 3 : Ecrire une requête SQL permettant d’avoir 1 ligne par id. Justifier la méthode employée.
--- Les doublons représentent ici l'évolution d'une commande d'un client.
--- Ainsi, on va garder la ligne avec 'updated_at' le plus recent.
--- Le but, va être de conserver l'état final de chaque commande d'un client.
 
+-- ====================================================================
+-- QUESTION 3 : Requête SQL pour avoir 1 ligne par id
+-- ====================================================================
+
+.print ""
+.print "========================================"
+.print "QUESTION 3 : Deduplication de orders"
+.print "========================================"
+.print ""
+
+.print "Apercu des resultats"
+.print ""
 SELECT *
 FROM orders
 WHERE ROWID IN (
@@ -46,46 +74,21 @@ WHERE ROWID IN (
 )
 LIMIT 10;
 
---- Question 4 - Faites de même avec la table order_items
--- D'abord, on va vérifier les doublons
+-- Creation de la vue orders_clean avec tous les nettoyages
+
+DROP VIEW IF EXISTS orders_clean;
+
+CREATE VIEW orders_clean AS
 SELECT
     id,
-    COUNT(*) as nb_occurrences
-FROM order_items
-GROUP BY id
-HAVING COUNT(*) > 1
-ORDER BY nb_occurrences DESC
-LIMIT 10;
-
-
--- Requête nous permettant d'avoir 1 ligne par id et création de la table 'order_item_clean' au passage
-DROP VIEW IF EXISTS order_items_clean;
-CREATE VIEW order_items_clean AS
-SELECT *
-FROM order_items
-WHERE ROWID IN (
-    SELECT ROWID
-    FROM (
-        SELECT
-            ROWID,
-            ROW_NUMBER() OVER (PARTITION BY id ORDER BY updated_at DESC) as rn
-        FROM order_items
-    )
-    WHERE rn = 1
-);
-
--- Verification
-SELECT 'order_items_clean' as table_name, COUNT(*) as nb_lignes
-FROM order_items_clean;
-
-
---- Question 5 - Écrivez une requête permettant de valider que toutes les valeurs du champ shipping_country font bien parties de la liste des pays valides
--- Liste des pays valides: FR, DE, IT, ES, BE
-
--- First Step. On doit créer la vue orders_clean puisque nous ne l'avons pas crée dans la partie 3.
-DROP VIEW IF EXISTS orders_clean;
-CREATE VIEW orders_clean AS
-SELECT *
+    customer_id,
+    created_at,
+    updated_at,
+    CASE
+        WHEN UPPER(TRIM(shipping_country)) = 'ED' THEN 'DE'
+        ELSE UPPER(TRIM(shipping_country))
+    END as shipping_country,
+    status
 FROM orders
 WHERE ROWID IN (
     SELECT ROWID
@@ -98,19 +101,104 @@ WHERE ROWID IN (
     WHERE rn = 1
 );
 
--- Second step : On va tenter d'identifier les valeurs hors du champ recherché
+.print ""
+.print "Verification de l'operation"
+.print ""
+SELECT 'orders_clean' as table_name, COUNT(*) as nb_lignes
+FROM orders_clean;
+
+.print ""
+.print ""
+
+
+-- ====================================================================
+-- QUESTION 4 : Déduplication de order_items
+-- ====================================================================
+
+.print ""
+.print "========================================"
+.print "QUESTION 4 : Deduplication de order_items"
+.print "========================================"
+.print ""
+
+.print "Etape 1 : Verification de la presence de doublons"
+.print ""
 SELECT
-    shipping_country,
-    COUNT(*) as nb_commandes
-FROM orders_clean
-WHERE shipping_country NOT IN ('FR', 'DE', 'IT', 'ES', 'BE')
-   OR shipping_country IS NULL
-GROUP BY shipping_country
-ORDER BY nb_commandes DESC
+    id,
+    COUNT(*) as nb_occurrences
+FROM order_items
+GROUP BY id
+HAVING COUNT(*) > 1
+ORDER BY nb_occurrences DESC
+LIMIT 10;
+
+.print ""
+.print ""
+.print "Etape 2 : Analyse de la nature des doublons"
+.print ""
+SELECT
+    id,
+    order_id,
+    product_id,
+    quantity,
+    unit_price,
+    updated_at,
+    COUNT(*) as nb_doublons
+FROM order_items
+GROUP BY id, order_id, product_id, quantity, unit_price, updated_at
+HAVING COUNT(*) > 1
 LIMIT 10;
 
 
--- Requete 2: Statistiques globales par statut de validation
+--Creation de la vue order_items_clean"
+DROP VIEW IF EXISTS order_items_clean;
+
+CREATE VIEW order_items_clean AS
+SELECT DISTINCT
+    id,
+    order_id,
+    product_id,
+    quantity,
+    unit_price,
+    updated_at
+FROM order_items;
+
+.print ""
+.print "Verification de l'operation"
+.print ""
+SELECT 'order_items_clean' as table_name, COUNT(*) as nb_lignes
+FROM order_items_clean;
+
+.print ""
+.print ""
+
+
+-- ====================================================================
+-- QUESTION 5 : Validation du champ shipping_country
+-- ====================================================================
+
+.print ""
+.print "========================================"
+.print "QUESTION 5 : Validation des pays"
+.print "========================================"
+.print ""
+
+.print "Anomalies dans la table brute"
+.print ""
+SELECT
+    shipping_country,
+    COUNT(*) as nb_commandes,
+    '"' || shipping_country || '"' as avec_guillemets
+FROM orders
+WHERE shipping_country NOT IN ('FR', 'DE', 'IT', 'ES', 'BE')
+   OR shipping_country IS NULL
+GROUP BY shipping_country
+ORDER BY nb_commandes DESC;
+
+.print ""
+.print ""
+.print "Statistiques globales de validation"
+.print ""
 SELECT
     CASE
         WHEN shipping_country IN ('FR', 'DE', 'IT', 'ES', 'BE') THEN 'Valide'
@@ -124,7 +212,10 @@ GROUP BY statut_validation
 ORDER BY nb_commandes DESC
 LIMIT 10;
 
--- Requete 3: Distribution par pays valide
+.print ""
+.print ""
+.print "Distribution geographique des commandes"
+.print ""
 SELECT
     shipping_country,
     COUNT(*) as nb_commandes,
@@ -135,3 +226,5 @@ GROUP BY shipping_country
 ORDER BY nb_commandes DESC
 LIMIT 10;
 
+.print ""
+.print ""

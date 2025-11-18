@@ -1,164 +1,178 @@
-#### PARTIE 5 – Marketing & Media
-## Introduction
-L'analyse de la performance marketing constitue un pilier fondamental de l'optimisation de la croissance. 
-En réconciliant les données de campagnes publicitaires avec les transactions générées, cette analyse permet de quantifier précisément le retour sur investissement de chaque euro dépensé en marketing et d'identifier les canaux et campagnes les plus efficaces.
-Cette partie exploite les tables d'attribution marketing pour mesurer la contribution de chaque campagne aux objectifs business.
+# PARTIE 5 – Marketing & Media
+Cette analyse vise à évaluer la performance des campagnes marketing en mesurant leur contribution au chiffre d'affaires et à l'acquisition de nouveaux clients. 
+--> L'objectif est d'identifier les canaux les plus rentables, d'optimiser l'allocation budgétaire et de quantifier la part du business générée organiquement versus celle issue des investissements marketing. 
+--> Ainsi,  la réconciliation entre les commandes, les revenus et les campagnes permet d'établir des métriques fondamentales comme le ROAS (Return on Ad Spend) et le CAC (Customer Acquisition Cost), essentielles pour piloter la stratégie d'acquisition.
 
-## Exploration des données marketing
+## Note méthodologique
+Cette analyse de la performance marketing est basée sur le montant des commandes calculé depuis order_items, suivant l'approche comptable adoptée dans les Parties 1-2 et maintenue en cohérence avec l'analyse LTV (Partie 4). 
+--> La Partie 3 a révélé que 25 commandes sur 1000 (2,5%) n'ont aucun paiement enregistré, représentant un manque à gagner de 11 583€ dont 10 714€ concernent des commandes déjà expédiées.
 
-L'entreprise a déployé quatre campagnes marketing sur la période analysée, couvrant différents canaux et périodes. 
-Le budget total investi s'élève à 22 000€ réparti sur quatre mois distincts. 
-> La campagne Summer Launch représente l'investissement le plus important avec 8 000€, soit 36% du budget total, tandis que Flash Sale constitue l'effort le plus modeste avec 3 000€.
-
-# Système d'attribution
-L'analyse de la table attribution révèle 916 lignes d'attribution concernant 549 commandes distinctes. 
-Cette différence entre le nombre de lignes et le nombre de commandes indique qu'une partie des commandes sont attribuées à plusieurs campagnes simultanément. 
-En moyenne, chaque commande attribuée au marketing est associée à 1.67 campagnes, suggérant un parcours client multi-touch où plusieurs points de contact marketing contribuent à la décision d'achat.
-Sur les 1 000 commandes totales de la période, 549 sont attribuées au marketing, soit 54.9%. Ce taux d'attribution de 55% indique qu'une part importante des ventes est directement liée aux efforts publicitaires, 
-tout en maintenant une base solide de trafic organique représentant 45% des commandes.
-
-## Question 1 : Métriques de performance par campagne
-L'analyse détaillée des quatre campagnes révèle des profils de performance radicalement différents, tant en termes de volume généré que d'efficacité économique.
-
-# Spring Sale (Meta) : Le champion de la rentabilité
-La campagne Spring Sale déployée sur Meta en avril 2025 émerge comme la plus performante du portefeuille avec un ROAS exceptionnel de 39.12. Pour chaque euro investi dans cette campagne, l'entreprise a généré 39.12€ de revenu, soit un retour de 3 812% sur l'investissement publicitaire.
-Cette campagne a généré 259 commandes attribuées pour un revenu total de 195 617.76€. Le panier moyen s'établit à 755.28€, significativement supérieur au panier moyen global observé dans les autres analyses (environ 480€). Cette inflation du panier moyen suggère soit que la campagne a attiré des clients particulièrement dépensiers, soit qu'elle a encouragé des achats multiples ou de produits premium.
-Le nombre de nouveaux clients acquis s'élève à 285, dépassant paradoxalement le nombre total de commandes attribuées de 259. Cette apparente incohérence s'explique par le système d'attribution multi-touch : certains nouveaux clients ont effectué leur première commande attribuée à Spring Sale, puis ont rapidement acheté à nouveau, cette seconde commande étant potentiellement attribuée à une autre campagne ou comptabilisée comme organique. Le total de clients distincts touchés par la campagne est de 178, confirmant que certains clients ont effectué plusieurs achats durant ou après l'exposition à cette campagne.
-Le CAC de cette campagne s'établit à seulement 17.0€, un coût d'acquisition remarquablement bas pour le secteur e-commerce. Avec un panier moyen de 755€ et un CAC de 17€, le ratio LTV/CAC au premier achat atteint déjà 44, largement au-dessus du seuil de rentabilité de 3 généralement recherché. Ce ratio exceptionnel signifie que chaque nouveau client acquis rembourse son coût d'acquisition 44 fois dès sa première transaction.
-Le pourcentage de nouveaux clients dans la base attribuée à cette campagne atteint 160%, un chiffre qui peut sembler contre-intuitif mais s'explique par la méthodologie de calcul : 285 nouveaux clients pour 178 clients distincts touchés. Ce ratio élevé indique que la campagne a principalement fonctionné comme un outil d'acquisition pure plutôt que de réactivation de clients existants.
-
-# Summer Launch (Google) : Le volume avec rentabilité modeste
-La campagne Summer Launch sur Google représente l'investissement le plus conséquent avec 8 000€ de budget. Elle a généré 258 commandes, un volume quasi-identique à Spring Sale malgré un budget 60% supérieur. Le revenu total atteint 215 901.86€, soit 10% de plus que Spring Sale, mais cette performance doit être relativisée par l'investissement supérieur.
-Le ROAS s'établit à 26.99, un niveau excellent mais significativement inférieur aux 39.12 de Spring Sale. Pour chaque euro investi, Google a généré 27€ de revenu, soit un retour de 2 599%. Bien que ce ratio puisse sembler enviable, il représente une efficacité inférieure de 31% par rapport à Meta.
-Le panier moyen de 836.83€ est le plus élevé de toutes les campagnes, dépassant même celui de Spring Sale. Cette performance suggère que Google a attiré des clients particulièrement qualifiés avec un pouvoir d'achat élevé ou une propension à acheter des produits premium. Cette caractéristique pourrait justifier la poursuite des investissements sur ce canal malgré un ROAS inférieur, si l'analyse LTV révèle que ces clients génèrent également plus de valeur à long terme.
-Cependant, l'efficacité en acquisition nouvelle présente des faiblesses majeures. La campagne n'a acquis que 44 nouveaux clients, soit 6.5 fois moins que Spring Sale avec un budget 1.6 fois supérieur. Le CAC explose à 181.0€, soit 10.6 fois le CAC de Meta. Cette disparité massive suggère que Google fonctionne davantage comme un canal de conversion pour des clients déjà en phase de considération avancée plutôt que comme un outil d'acquisition de nouveaux prospects.
-Le pourcentage de nouveaux clients dans la base attribuée n'est que de 24.44%, le plus faible de toutes les campagnes. Cela confirme que Google a principalement servi à convertir ou réactiver des clients existants plutôt qu'à élargir la base client. Sur les 180 clients distincts touchés, seulement 44 étaient nouveaux, indiquant que 136 clients (75.5%) étaient déjà dans la base avant l'exposition à cette campagne.
-
-# Flash Sale (Instagram) : Le test prometteur mais limité
-La campagne Flash Sale sur Instagram représente le plus petit investissement avec 3 000€ sur une période très courte de seulement 5 jours en juillet. Malgré cette durée limitée, elle a généré 32 commandes pour un revenu de 30 930.24€.
-Le ROAS de 10.31 est le plus faible des campagnes actives, mais reste néanmoins largement rentable avec un retour de 931% sur investissement. Chaque euro dépensé sur Instagram a rapporté 10.31€, un niveau qui serait considéré comme excellent dans de nombreux contextes mais apparaît modeste comparé aux performances de Meta et Google.
-Le panier moyen atteint 966.57€, le plus élevé de toutes les campagnes. Ce chiffre remarquable suggère qu'Instagram a attiré une clientèle premium ou que la mécanique de la "flash sale" a encouragé des achats groupés pour profiter de l'urgence de l'offre. Cette capacité à générer des paniers très élevés constitue un atout stratégique d'Instagram qui pourrait justifier des investissements plus conséquents malgré un ROAS inférieur.
-L'acquisition nouvelle est extrêmement limitée avec seulement 2 nouveaux clients, résultant en un CAC de 1 500€, de loin le plus élevé du portefeuille. Ce CAC prohibitif disqualifie Instagram comme canal d'acquisition principale dans sa configuration actuelle. Avec un tel coût d'acquisition, il faudrait que chaque nouveau client génère plus de 4 500€ de LTV pour atteindre un ratio LTV/CAC de 3, ce qui semble irréaliste compte tenu des analyses de cohortes précédentes montrant des LTV cumulées autour de 370€ à 3 mois.
-Le pourcentage de nouveaux clients n'est que de 6.45%, confirmant qu'Instagram a fonctionné quasi-exclusivement comme un outil de conversion de clients existants. Sur 31 clients distincts touchés, 29 étaient déjà dans la base. Cette concentration sur les clients existants n'est pas nécessairement négative si la campagne a réussi à réactiver des clients inactifs ou à augmenter la fréquence d'achat, mais elle limite l'impact de la campagne sur la croissance de la base client.
-
-# Back to School (TikTok) : L'échec complet
-La campagne Back to School sur TikTok représente un cas d'école d'échec total. Malgré un budget conséquent de 6 000€ (le deuxième plus élevé après Google) déployé sur un mois, cette campagne n'a généré aucune commande attribuée. Le ROAS est donc nul, et le CAC indéfini.
-Plusieurs hypothèses peuvent expliquer cet échec. Premièrement, un problème de timing : la campagne a démarré le 15 août et s'est terminée le 15 septembre, des dates potentiellement inadaptées au cycle d'achat rentrée scolaire du catalogue de produits de l'entreprise. Si les produits vendus sont des goodies et accessoires d'entreprise plutôt que des fournitures scolaires classiques, le positionnement "Back to School" était peut-être inapproprié.
-Deuxièmement, un problème de ciblage : TikTok attire une audience jeune qui pourrait ne pas correspondre au profil d'acheteur type des produits du catalogue, notamment si ceux-ci sont orientés B2B ou vers des acheteurs plus matures.
-Troisièmement, un problème créatif : le format et le message de la campagne pourraient avoir été inadaptés aux codes et attentes de la plateforme TikTok, entraînant un faible engagement et une absence totale de conversion.
-Quatrièmement, un problème technique d'attribution : il est théoriquement possible que la campagne ait généré des ventes mais que le système de tracking n'ait pas correctement attribué ces conversions à TikTok, bien que cette hypothèse soit peu probable compte tenu du fonctionnement correct de l'attribution pour les trois autres canaux.
-Cinquièmement, un problème de temporalité dans les données : la campagne s'étant terminée le 15 septembre, si notre extraction de données s'est faite avant cette date ou peu après, certaines conversions en cours de maturation pourraient ne pas encore être comptabilisées. Cependant, l'absence totale de toute commande rend cette explication peu crédible.
-Ce cas illustre l'importance de tests progressifs lors de l'exploration de nouveaux canaux. Investir 6 000€ d'un coup sur un canal non éprouvé sans phase de test préalable constitue un risque qui s'est matérialisé ici en perte sèche. Une approche plus prudente aurait consisté à tester TikTok avec un budget de 1 000€, évaluer les résultats, optimiser l'approche, puis scaler progressivement.
+ Les ROAS présentés constituent des bornes supérieures devant être ajustés de 2,5% pour une vision strictement cash. 
+--> Cette approche comptable reste pertinente pour l'analyse marketing car elle mesure la génération de demande, objectif premier du marketing. 
+--> L'ajustement de 2,5% s'applique uniformément à tous les canaux, préservant le classement relatif des campagnes et ne modifiant pas les décisions d'allocation budgétaire.
 
 
-## Question 2 : Analyse comparative
-# Campagne la plus rentable : Spring Sale domine largement
-L'analyse comparative confirme sans ambiguïté la suprématie de Spring Sale comme campagne la plus rentable. Avec un ROAS de 39.12, elle dépasse Summer Launch de 45% et écrase Flash Sale qui affiche un ROAS 3.8 fois inférieur.
-Le profit net généré par Spring Sale atteint 190 617.76€ (revenu de 195 617.76€ moins investissement de 5 000€). Ce profit représente 38 fois l'investissement initial, un multiple exceptionnel démontrant une efficacité publicitaire remarquable. En comparaison, Summer Launch génère certes un profit net supérieur en valeur absolue (207 901.86€), mais avec un investissement 60% plus élevé, son efficacité relative reste inférieure.
-Plusieurs facteurs explicatifs peuvent être avancés pour cette performance exceptionnelle. Le timing d'avril, correspondant au printemps et potentiellement au début du second trimestre fiscal pour les entreprises clientes, pourrait avoir capté un moment de forte disponibilité budgétaire. Le canal Meta bénéficie d'algorithmes de ciblage particulièrement sophistiqués permettant d'atteindre précisément les audiences à fort potentiel de conversion. Le message "Spring Sale" crée une urgence saisonnière encourageant l'achat immédiat. Enfin, la période d'avril correspond à la cohorte ayant montré les meilleures performances en termes de LTV dans l'analyse précédente, suggérant une synergie entre qualité d'acquisition et moment de l'année.
+## Exploration des campagnes 
+L'analyse porte sur quatre campagnes marketing déployées entre avril et septembre 2025, couvrant quatre canaux distincts. 
+--> La campagne Spring Sale sur Meta a été lancée en avril avec un budget de 5000€ pour une durée d'un mois. 
+--> Summer Launch sur Google représente l'investissement le plus important avec 8000€ alloués sur le mois de juin. 
+--> Flash Sale sur Instagram constitue une opération courte de cinq jours en juillet avec 3000€ de budget. 
+--> Back to School sur TikTok était planifiée pour la rentrée (15 août au 15 septembre) avec un budget de 6000€, mais se situe en dehors de la période couverte par les données disponibles et ne peut donc pas être évaluée dans cette analyse.
 
-# Campagne la plus efficace en acquisition : Spring Sale encore
-L'analyse du CAC confirme également la domination de Spring Sale comme outil d'acquisition le plus efficient. Avec un CAC de 17.0€, cette campagne acquiert des nouveaux clients 10.6 fois moins cher que Google (181€) et 88 fois moins cher qu'Instagram (1 500€).
-Le revenu généré par nouveau client atteint 686.38€ pour Spring Sale, soit un ratio revenu/CAC de 40.38. Cela signifie que chaque nouveau client rapporte 40 fois son coût d'acquisition dès sa première interaction, un ratio qui devient encore plus favorable si l'on considère les achats répétés ultérieurs. À titre de comparaison, les benchmarks sectoriels considèrent généralement qu'un ratio LTV/CAC de 3 est le minimum acceptable et qu'un ratio de 5 est excellent. Un ratio de 40 au premier achat dépasse tous les standards connus.
-Cette efficacité d'acquisition exceptionnelle suggère que Meta a su cibler des audiences hautement qualifiées et réceptives au message de la marque. L'algorithme de Meta a probablement identifié des micro-segments d'utilisateurs présentant une forte propension à devenir clients et a concentré la diffusion sur ces audiences premium. Cette capacité de ciblage précis explique comment un investissement relativement modeste de 5 000€ a pu générer 285 nouveaux clients de haute qualité.
+La table attribution révèle que certaines commandes sont attribuées à plusieurs campagnes simultanément. 
+--> Cette multi-attribution s'observe  sur les campagnes Spring Sale et Summer Launch où des commandes enregistrent jusqu'à trois points de contact avec différentes campagnes. 
 
-# Classement global et enseignements stratégiques
-Le classement des campagnes selon différents critères révèle une hiérarchie claire :
+La table attribution contient 916 lignes reliant 549 commandes distinctes à trois campagnes actives. 
+Cette multi-attribution s'observe systématiquement avec des commandes enregistrant jusqu'à trois points de contact pour une même campagne. 
+L'analyse détaillée des 20 premières lignes montre que les commandes 1, 4, 6, 10, 14, 16, 23, 24 et 34 apparaissent chacune deux fois ou plus pour la même campagne, témoignant d'un problème structurel de duplication plutôt que d'une véritable attribution multi-touch intentionnelle.
 
-1. Par ROAS :
-
-Spring Sale (Meta) : 39.12
-Summer Launch (Google) : 26.99
-Flash Sale (Instagram) : 10.31
-Back to School (TikTok) : 0
-
-
-2. Par CAC :
-
-Spring Sale (Meta) : 17€
-Summer Launch (Google) : 181€
-Flash Sale (Instagram) : 1 500€
-Back to School (TikTok) : N/A
+Cette duplication a nécessité une correction avant toute analyse. La correction a consisté à ajouter une étape de déduplication (SELECT DISTINCT) sur les couples (order_id, campaign_id) avant agrégation, garantissant qu'une commande n'est comptée qu'une seule fois par campagne. 
+Sur les 1000 commandes totales du dataset:
+--> 549 (54,9%) sont attribuées à au moins une campagne marketing, 
+--> 451 (45,1%) sont classées comme organiques
+--> Ce taux d'attribution de 55% indique une répartition équilibrée entre acquisition payante et trafic naturel, configuration saine témoignant d'une marque établie disposant d'une notoriété organique substantielle tout en investissant activement dans la croissance via le marketing payant.
 
 
-3. Par volume de nouveaux clients :
+## Question 1 : Performance par campagne
 
-Spring Sale (Meta) : 285 clients
-Summer Launch (Google) : 44 clients
-Flash Sale (Instagram) : 2 clients
-Back to School (TikTok) : 0 clients
+L'analyse des métriques de performance révèle des écarts significatifs entre les quatre campagnes déployées. 
 
-
-4. Par panier moyen :
-
-Flash Sale (Instagram) : 966.57€
-Summer Launch (Google) : 836.83€
-Spring Sale (Meta) : 755.28€
-Back to School (TikTok) : N/A
-
-Ces classements révèlent que Meta combine excellence en acquisition, rentabilité supérieure, et volume significatif. 
-> Google excelle en panier moyen et génère un volume correct mais souffre d'un CAC élevé. 
-> Instagram génère les paniers les plus élevés mais échoue dramatiquement en acquisition nouvelle. 
-> TikTok n'a généré aucune valeur mesurable.
+### Spring Sale (Meta) - Performance d'exception
+La campagne Spring Sale sur Meta domine tous les indicateurs avec un ROAS de 24,03, signifiant que chaque euro investi génère 24,03€ de revenu. 
+--> Ce ratio exceptionnel s'explique par un spend de 5000€ ayant généré 120 147€ de revenu via 259 commandes, produisant un profit net de 115 147€. 
+--> Le panier moyen s'établit à 464€, légèrement inférieur à la moyenne du site (482€).
+--> L'efficacité en acquisition est très intéressante avec un CAC de seulement 29€ pour 172 nouveaux clients.
+--> Cette performance signifie que Meta a principalement servi de canal d'acquisition plutôt que de réactivation, capturant une audience qualifiée au coût le plus bas du dataset. `
 
 
-## Question 3 : Répartition globale marketing vs. organique
-# Vue d'ensemble de la contribution marketing
-L'analyse de la répartition entre trafic marketing et organique révèle un équilibre relativement sain entre dépendance publicitaire et force intrinsèque de la marque.
-Sur les 1 000 commandes totales, 549 sont attribuées au marketing (54.9%) tandis que 451 sont organiques (45.1%). Cette répartition proche de 55/45 indique que l'entreprise génère environ la moitié de son activité via des canaux non payants, témoignant d'une certaine autonomie par rapport aux investissements publicitaires. Une entreprise entièrement dépendante du marketing payant afficherait des ratios de 80% ou plus de commandes issues de campagnes, créant une fragilité face aux augmentations de coûts publicitaires. Inversement, une entreprise générant 90% de trafic organique aurait du mal à scaler rapidement sa croissance.
-Le revenu généré par le marketing atteint 442 449.86€ (67.13% du total) pour un investissement de 22 000€, générant un ROAS global de 20.11. Ce ROAS moyen pondéré est excellent et confirme la rentabilité d'ensemble du dispositif publicitaire. Le revenu organique s'élève à 216 615.06€ (32.87%), un montant substantiel généré sans coût d'acquisition direct.
-Le panier moyen des commandes marketing (483.02€) est quasiment identique à celui des commandes organiques (480.30€), une similarité qui suggère que les campagnes n'ont pas biaisé la structure de clientèle vers des profils particuliers. Cette homogénéité des paniers moyens indique que les efforts marketing attirent des clients dont le comportement d'achat est comparable à celui des clients organiques, un signe de qualité du ciblage.
+### Summer Launch (Google) - Performance solide mais coûteuse
+La campagne Summer Launch sur Google affiche un ROAS de 16,07, excellent en valeur absolue mais nettement inférieur à Meta. 
+--> Avec un budget de 8000€, elle génère 128 558€ de revenu via 258 commandes, produisant un profit net de 120 558€. 
+--> Le panier moyen atteint 498€, le plus élevé des trois campagnes actives, suggérant que Google capte une audience disposée à des achats plus conséquents.
+--> Le principal point faible réside dans le CAC de 307€, dix fois supérieur à celui de Meta, pour seulement 26 nouveaux clients acquis. 
+--> Ce coût élevé s'explique par un taux de nouveaux clients de seulement 14,4%, révélant que Google sert principalement à réactiver des clients existants plutôt qu'à en acquérir de nouveaux.
+--> Les 180 clients totaux touchés incluent donc 154 clients existants (85,6%), configuration inverse de celle observée sur Meta.
 
-# Répartition par canal
-Premièrement, le trafic organique représente la source unique la plus importante tant en volume de commandes qu'en part de voix, confirmant l'existence d'une base solide de notoriété et de fidélisation naturelle. Deuxièmement, Google et Meta génèrent des volumes quasi-identiques (258 vs 259 commandes) malgré des budgets très différents (8 000€ vs 5 000€), illustrant l'efficacité supérieure de Meta. Troisièmement, Instagram reste marginal avec seulement 3.2% des commandes, questionnant la pertinence d'investissements futurs significatifs sur ce canal sans refonte complète de l'approche.
-Le panier moyen d'Instagram (524.24€) dépasse celui de tous les autres canaux, y compris l'organique. Cette capacité à générer des transactions de forte valeur constitue l'atout principal d'Instagram et suggère que ce canal pourrait être optimisé non pas comme outil d'acquisition mais comme vecteur d'upselling vers des clients existants à fort potentiel.
+Cette différence de positionnement entre Meta (acquisition) et Google (réactivation) s'explique par les mécaniques propres à chaque canal. 
+--> Google Ads capte une intention de recherche existante où les clients cherchent activement des produits, incluant potentiellement des clients déjà familiers avec la marque. 
+--> Meta diffuse des publicités dans le fil d'actualité, touchant des audiences nouvelles qui découvrent la marque pour la première fois.
 
-# Enjeux stratégiques de l'équilibre marketing/organique
-La répartition 55/45 entre marketing et organique soulève plusieurs questions stratégiques sur l'orientation future des investissements.
-D'un côté, le trafic organique représentant 45% des commandes pour 0€ d'investissement direct génère une marge brute maximale sur ces transactions. Chaque euro de revenu organique contribue directement au résultat net après déduction des seuls coûts opérationnels (produits, logistique, personnel). Cette contribution est précieuse et doit être préservée et renforcée via des initiatives de SEO, content marketing, programme de parrainage, et amélioration de l'expérience client favorisant le bouche-à-oreille.
-D'un autre côté, le marketing payant représentant 55% des commandes fournit un levier de croissance contrôlable et scalable. Avec un ROAS global de 20, l'entreprise peut théoriquement multiplier son investissement marketing par 2, 3 ou 5 et générer une croissance proportionnelle du chiffre d'affaires, sous réserve de maintenir l'efficacité des campagnes et de ne pas saturer les audiences disponibles.
-Le risque principal d'une dépendance excessive au marketing payant réside dans la volatilité des coûts publicitaires. Les plateformes comme Meta et Google augmentent régulièrement leurs tarifs via des mécaniques d'enchères où la concurrence pousse les CPM à la hausse. Une entreprise générant 80% de son activité via du paid media pourrait voir sa rentabilité s'effondrer si les coûts d'acquisition doublaient suite à une intensification de la concurrence. Inversement, une entreprise à 90% organique perd l'opportunité d'accélérer sa croissance et risque de se faire distancer par des concurrents plus agressifs en acquisition.
-L'équilibre actuel 55/45 apparaît donc relativement sain, permettant une croissance via le paid media tout en maintenant une base organique solide réduisant le risque. La stratégie optimale consisterait probablement à intensifier les investissements sur les canaux les plus performants (Meta principalement) tout en renforçant parallèlement les initiatives organiques pour maintenir ce ratio autour de 50/50.
 
-## Analyses complémentaires et recommandations stratégiques
-# Optimisation de l'allocation budgétaire
-L'analyse comparative des performances suggère une réallocation radicale du budget marketing pour maximiser le retour sur investissement global.
-Actuellement, le budget de 22 000€ se répartit ainsi : Meta 23%, Google 36%, TikTok 27%, Instagram 14%. Cette allocation reflète davantage une volonté de diversification des canaux qu'une optimisation basée sur les performances observées.
-Une allocation optimisée basée sur les ROAS observés suggérerait : Meta 60%, Google 35%, Instagram 5%, TikTok 0%. Cette redistribution concentrerait les ressources sur les canaux ayant démontré leur efficacité tout en maintenant une présence sur Google malgré son CAC élevé, compte tenu de son excellent panier moyen. Instagram conserverait une allocation minimaliste pour capitaliser sur sa capacité à générer des paniers premium, mais serait reconfiguré comme outil de conversion de clients existants plutôt que d'acquisition. TikTok serait abandonné ou mis en pause jusqu'à identification d'une approche viable.
-Avec un budget constant de 22 000€ réalloué ainsi : Meta 13 200€, Google 7 700€, Instagram 1 100€. En supposant le maintien des performances observées, cette allocation générerait : Meta 517 000€ de revenu, Google 207 000€, Instagram 11 300€, soit un total de 735 300€ contre 442 450€ actuellement, représentant une augmentation potentielle de 66% du revenu marketing pour le même investissement.
+### Flash Sale (Instagram) - Échec structurel
+La campagne Flash Sale sur Instagram présente un ROAS de 5,75, techniquement rentable mais largement insuffisant pour justifier l'investissement. 
+--> Avec 3000€ de budget, elle génère 17 256€ de revenu via seulement 32 commandes, produisant un profit net de 14 256€. Le panier moyen atteint 539€, le plus élevé du dataset, mais ce chiffre ne compense pas le volume faibles de commandes.
 
-# Stratégie différenciée par canal
-Chaque canal ayant démontré des profils de performance distincts, une stratégie différenciée s'impose.
+Le point d'échec majeur réside dans l'acquisition avec un unique nouveau client pour 3000€ investis, produisant un CAC aberrant de 3000€. 
+--> Ce ratio indique un problème fondamental de ciblage ou de créativité publicitaire ayant échoué à convaincre de nouveaux acheteurs. 
+--> Le taux de nouveaux confirme que la campagne a principalement touché des clients existants (31 clients sur 32), montrant ainsi, une configuration coûteuse et inefficace pour une campagne censée générer de la croissance.
 
-# Meta : Le moteur d'acquisition à scaler agressivement
-Meta ayant démontré un ROAS de 39 et un CAC de 17€, ce canal mérite une intensification majeure des investissements. L'objectif devrait être de multiplier par 2 ou 3 le budget alloué tout en surveillant étroitement le maintien des KPIs. Les risques de saturation des audiences existent mais sont probablement lointains compte tenu de l'ampleur des bases utilisateurs de Meta.
-Les best practices à appliquer incluent : segmentation fine des audiences pour identifier les micro-segments les plus performants, A/B testing systématique des créatifs pour optimiser les taux de conversion, exploitation du pixel Meta pour le retargeting des visiteurs non convertis, et utilisation des audiences lookalike basées sur les meilleurs clients acquis.
+La courte durée de 5 jours seulement, a probablement limité l'optimisation algorithmique de la plateforme et la capacité à trouver les bonnes audiences. 
+--> Instagram nécessite généralement une phase d'apprentissage plus longue pour affiner le ciblage et améliorer la performance. 
 
-# Google : L'outil de conversion haut de panier à optimiser
-Google génère d'excellents paniers moyens mais souffre d'un CAC élevé. Ce profil suggère que Google capte principalement des utilisateurs en phase avancée de considération, probablement via des requêtes de recherche à forte intention d'achat. La stratégie devrait se concentrer sur l'optimisation du CAC via un travail approfondi sur les mots-clés, excluant les termes générant du trafic à faible conversion et concentrant les enchères sur les requêtes à haute valeur.
-L'implémentation de campagnes de remarketing dynamique permettrait de réengager les visiteurs ayant consulté des produits premium, capitalisant sur la propension de Google à générer des gros paniers. Une analyse détaillée de la répartition Search vs Display vs Shopping révélerait probablement des disparités de performance importantes justifiant une réallocation interne du budget Google entre ces sous-canaux.
+Malgré un ROAS techniquement positif, cette campagne constitue un échec stratégique. Les 14 256€ de profit net auraient pu générer bien plus de valeur s'ils avaient été réalloués sur Meta (potentiellement 342 366€ de revenu avec un ROAS de 24,03) ou Google (115 166€ de revenu). 
+--> Le coût d'opportunité de maintenir Instagram est donc considérable.
 
-# Instagram : Le spécialiste du premium à repositionner
-Instagram génère les paniers moyens les plus élevés mais échoue dramatiquement en acquisition nouvelle. Cette caractéristique suggère un repositionnement radical : abandonner l'objectif d'acquisition nouvelle via Instagram et le reconfigurer exclusivement comme outil d'upselling vers la base existante.
-Des campagnes de retargeting ciblant les clients ayant déjà acheté, avec des messages mettant en avant des produits premium ou des collections exclusives, capitaliseraient sur la capacité démontrée d'Instagram à générer des transactions de forte valeur. Le budget pourrait être drastiquement réduit, concentré sur des micro-campagnes très ciblées visant les segments de clients à plus forte LTV identifiés dans l'analyse de cohortes.
+### Back to School (TikTok) - Absence totale de résultats
+### Back to School (TikTok) - Hors période d'analyse
 
-# TikTok : La remise en question complète
-L'échec total de TikTok nécessite une décision stratégique claire : soit abandonner définitivement ce canal, soit revenir aux fondamentaux avec une approche test-and-learn prudente.
-Si la direction décide de réessayer TikTok, l'approche devrait être radicalement différente : budget test de 1 000€ maximum, ciblage d'une audience très spécifique identifiée comme présente sur la plateforme, créatifs natifs respectant les codes TikTok plutôt que du contenu publicitaire classique recyclé, et période de test courte (15 jours) avec des critères de succès prédéfinis. Si ces tests ne génèrent pas au minimum 10 commandes attribuées avec un ROAS supérieur à 2, le canal devrait être définitivement abandonné pour concentrer les ressources sur les canaux performants.
+La campagne Back to School sur TikTok, planifiée pour le 15 août au 15 septembre avec un budget de 6000€, se situe en dehors de la période couverte par le dataset (1er avril au 14 juillet). 
+--> Cette campagne n'apparaît pas dans les résultats car elle n'avait pas encore été lancée au moment de l'extraction des données.
+--> L'absence de données d'attribution confirme que TikTok n'a généré aucune commande sur la période avril-juillet, ce qui est cohérent avec une campagne non encore exécutée. 
 
-# Métriques de suivi et pilotage
-L'optimisation continue des performances marketing nécessite la mise en place d'un système de suivi rigoureux avec des revues hebdomadaires ou bimensuelles des KPIs clés.
-Les métriques primaires à surveiller incluent : ROAS par campagne et par canal, CAC par source, nombre de nouveaux clients acquis, panier moyen par canal, et ratio LTV/CAC calculé en croisant les données d'attribution avec l'analyse de cohortes. Une dégradation de 20% du ROAS d'un canal ou une augmentation de 50% du CAC devrait déclencher une alerte et une investigation immédiate.
-Les métriques secondaires incluant : taux de clics des annonces, coût par clic, taux de conversion du trafic payant, taux de rebond sur les landing pages, et délai moyen entre exposition publicitaire et conversion. Ces indicateurs intermédiaires permettent de diagnostiquer précisément où se situe un problème de performance : au niveau de l'attractivité de l'annonce, de la qualité du trafic généré, ou de l'efficacité du site à convertir.
-Un dashboard consolidé actualisé quotidiennement fournirait une vue d'ensemble permettant de réagir rapidement aux inflexions de performance et d'optimiser l'allocation budgétaire en temps réel entre les canaux performants et sous-performants.
+L'écart de performance entre Meta (ROAS 24,03, CAC 29€) et Instagram (ROAS 5,75, CAC 3000€) révèle que tous les canaux social media ne se valent pas. 
+--> Meta bénéficie d'algorithmes de ciblage plus matures, d'un volume d'utilisateurs plus large et d'options de ciblage plus granulaires. 
+--> Instagram, bien que propriété de Meta, fonctionne différemment avec un format visuel nécessitant des créatifs de très haute qualité et une audience plus jeune potentiellement moins intéressée par le catalogue produit.
 
-# Intégration avec l'analyse de cohortes
-La combinaison des données d'attribution marketing avec l'analyse de cohortes LTV effectuée en Partie 4 révélerait des insights puissants sur la qualité relative des clients acquis via chaque canal.
-Si l'analyse révélait par exemple que les clients acquis via Meta en avril présentent une LTV à 12 mois significativement supérieure à la moyenne globale, cela validerait doublement l'excellence de ce canal non seulement en efficacité d'acquisition immédiate mais aussi en qualité de clients à long terme. Inversement, si les clients Google montraient une LTV inférieure malgré leur panier initial élevé, cela suggérerait un problème de fidélisation de ces clients justifiant des efforts spécifiques de retention.
-Cette analyse croisée permettrait de calculer un ratio LTV/CAC par canal, la métrique ultime de rentabilité marketing. Un canal présentant un CAC élevé pourrait être justifié si la LTV correspondante est proportionnellement supérieure. À l'inverse, un canal avec un CAC faible mais une LTV également faible pourrait s'avérer moins intéressant qu'il n'y paraît.
+Google se positionne comme canal complémentaire capturant l'intention de recherche et servant principalement à réactiver la base existante. 
+--> Son ROAS de 16,07 reste excellent mais son CAC élevé le rend moins adapté à l'acquisition pure qu'à la maximisation de la valeur des clients existants.
 
-## Conclusion
-L'analyse marketing révèle une situation contrastée avec des succès éclatants sur certains canaux et des échecs complets sur d'autres. Spring Sale sur Meta émerge comme le champion incontesté avec un ROAS de 39 et un CAC de 17€, démontrant une efficacité publicitaire exceptionnelle. Summer Launch sur Google génère un volume important et d'excellents paniers moyens mais souffre d'un CAC 10 fois supérieur. Flash Sale sur Instagram excelle en valeur de panier mais échoue en acquisition nouvelle. Back to School sur TikTok représente un échec total nécessitant une remise en question fondamentale de l'approche ou un abandon du canal.
-La répartition 55% marketing / 45% organique témoigne d'un équilibre relativement sain entre dépendance publicitaire et force intrinsèque de la marque. Le ROAS global de 20 confirme la rentabilité d'ensemble du dispositif marketing et justifie une intensification des investissements, sous réserve d'une réallocation optimisée concentrant les ressources sur les canaux les plus performants.
-Les recommandations stratégiques principales incluent : tripler le budget Meta pour capitaliser sur son efficacité exceptionnelle, maintenir Google en optimisant le CAC via un travail fin sur les mots-clés, repositionner Instagram comme outil d'upselling vers clients existants plutôt que d'acquisition nouvelle, et soit abandonner TikTok soit le retester avec une approche radicalement différente et des budgets tests prudents.
-L'intégration de cette analyse marketing avec les données de cohortes LTV de la Partie 4 fournirait une vision complète du cycle de vie client par canal d'acquisition, permettant d'optimiser non seulement les coûts d'acquisition immédiats mais aussi la valeur générée sur la durée de vie complète des clients acquis. Cette vision holistique constitue le fondement d'une stratégie marketing data-driven maximisant la croissance profitable à long terme.
+Ainsi, on peut procéder aux recommendations suivantes:
+
+1. Réallocation budgétaire immédiate - Augmenter significativement le budget Meta (de 5000€ à 15 000-20 000€) pour capitaliser sur un ROAS exceptionnel tant que la performance se maintient et qu'on ne sature pas l'audience.
+
+2. Maintien Google avec ajustement - Conserver Google à 8000€ mais repositionner explicitement comme canal de réactivation plutôt que d'acquisition. 
+--> Optimiser les campagnes pour cibler les segments à haute valeur de la base existante (clients cohorte avril par exemple).
+
+3. Arrêt immédiat Instagram - Couper la campagne Instagram et réallouer les 3000€ sur Meta ou Google. 
+--> Si Instagram doit être retesté, exiger une refonte complète des créatifs et du ciblage avec un budget test à 1000 euros par example.
+
+4. Évaluation TikTok post-lancement - Suivre rigoureusement les performances de la campagne TikTok prévue en août-septembre avec des KPIs stricts (ROAS minimum 10, CAC maximum 100€). 
+--> TikTok convient mieux aux marques B2C grand public avec un fort potentiel viral et une audience jeune.
+--> Cependant, Tiktok aura tendance à suivre les mêmes effets que Instagram. Ainsi, une refonte complète des créatifs et du ciblage est importante de sorte à attirer la population relativement jeune de TikTok. 
+
+5. Suivi du ratio LTV/CAC par canal - Établir un tableau de bord mesurant l'évolution du CAC et de la LTV par canal et par cohorte mensuelle pour détecter rapidement les dégradations de performance et ajuster les budgets en conséquence.
+
+
+
+## Question 2a : Campagne la plus rentable (ROAS maximum)
+
+La campagne Spring Sale sur Meta est la plus rentable avec un ROAS de 24,03, soit 24,03€ générés pour chaque euro investi. 
+--> Ce résultat exceptionnel positionne Meta comme le canal le plus intéressant.
+
+Avec un budget de 5000€, Spring Sale génère 120 147€ de revenu pour un profit net de 115 147€. 
+--> Ce niveau de profit représente 23 fois la mise initiale, performance rare dans le marketing digital où un ROAS supérieur à 5:1 est déjà considéré comme excellent. 
+
+
+## Question 2b : Campagne la plus efficace en acquisition (CAC minimum)
+
+Spring Sale sur Meta remporte également le titre de campagne la plus efficace en acquisition client avec un CAC de 29€, dix fois inférieur à Google (307€) et cent fois inférieur à Instagram (3000€).
+--> Ce CAC exceptionnel s'accompagne d'un volume significatif de 172 nouveaux clients. 
+--> Cette efficacité en acquisition justifie ainsi une augmentation massive du budget Meta tant que le CAC reste sous contrôle. 
+
+
+## Question 3 : Répartition Organique vs Marketing
+L'analyse de la répartition des commandes révèle un équilibre quasi-parfait entre trafic marketing et trafic organique.
+
+Sur les 1000 commandes totales du dataset :
+- 549 commandes (54,9%) sont attribuées aux campagnes marketing, générant 265 960€ de revenu (55,1%). 
+- 451 commandes (45,1%) sont classées comme organiques, générant 216 615€ de revenu (44,9%).
+
+Cette répartition 55/45 témoigne d'une situation saine où l'entreprise n'est ni trop dépendante du marketing payant, présentant un risque de non-rentabilité si les coûts augmentent, 
+ni trop dépendante du trafic organique, avec un risque de stagnation si l'acquisition naturelle plafonne. 
+
+### Panier moyen
+Le panier moyen marketing s'établit à 484€ contre 480€ en organique, différence négligeable de 1% indiquant que la qualité des commandes est similaire entre les deux sources. 
+--> Cette quasi-égalité suggère que le marketing ne se contente pas de générer du volume à bas panier mais attire des clients au même profil de dépense que le trafic organique.
+
+
+Cette répartition 55/45 positionne ainsi l'entreprise dans une zone de confort stratégique. 
+--> Le marketing payant génère suffisamment de volume (55%) pour assurer la croissance et l'acquisition de nouveaux clients
+--> tandis que le trafic organique (45%) fournit une base stable réduisant la dépendance aux plateformes publicitaires et leurs variations de coûts.
+
+La part organique de 45% peut provenir de plusieurs sources complémentaires:
+- référencement naturel (SEO) captant des recherches Google sans coût publicitaire
+- - trafic direct de clients revenant sur le site par mémorisation de la marque
+- bouche-à-oreille et recommandations clients
+- présence sur les réseaux sociaux en contenu non sponsorisé
+
+
+## Question 3b : Détail par canal
+La décomposition par canal marketing révèle une distribution relativement équilibrée entre Meta et Google, avec Instagram plutot sur le déclin.
+
+### Meta (259 commandes, 120 147€, 25,9% des commandes, 24,9% du revenu)
+Meta génère un volume de commandes similaire à Google (259 vs 258) mais avec un revenu légèrement inférieur (120 147€ vs 128 558€)
+--> expliqué par un panier moyen plus bas (464€ vs 498€). 
+--> Malgré ce panier inférieur, Meta reste le canal champion grâce à son ROAS exceptionnel de 24,03 et son CAC de 29€.
+
+La part de 25,9% des commandes totales positionne Meta comme un pilier majeur de l'acquisition. 
+Cette performance démontre que Meta n'est pas un canal d'appoint mais un moteur de croissance à part entière, capable de générer un quart des commandes du site avec une rentabilité record.
+
+### Google (258 commandes, 128 558€, 25,8% des commandes, 26,6% du revenu)
+Google génère le revenu le plus élevé des trois canaux actifs (128 558€) grâce au panier moyen le plus élevé (498€).
+--> La part de 26,6% du revenu total en fait le premier contributeur marketing en valeur absolue, devant Meta (24,9%).
+
+Cette position dominante en revenu mais secondaire en rentabilité (ROAS 16,07) et en acquisition (CAC 307€) positionne Google comme canal de réactivation et de maximisation de valeur plutôt que de conquête pure. 
+--> Les 258 commandes incluent une majorité de clients existants (85,6%), configuration où Google excelle en capturant l'intention de recherche de clients déjà familiers avec la marque.
+
+### Instagram (32 commandes, 17 256€, 3,2% des commandes, 3,6% du revenu)
+Instagram occupe une position marginale avec seulement 3,2% des commandes et 3,6% du revenu, contribution ne justifiant pas l'investissement de 3000€. 
+Le panier moyen de 539€ (le plus élevé) ne compense pas le volume faible de 32 commandes et l'échec en acquisition, avec 1 seul nouveau client engendré.
+--> Cette faible part relative confirme qu'Instagram ne fonctionne pas pour ce catalogue produit ou cette audience. 
+
+
+### Organique (451 commandes, 216 615€, 45,1% des commandes, 44,9% du revenu)
+Le trafic organique demeure le premier contributeur en volume absolu (451 commandes) et le deuxième en revenu (216 615€)
+--> devant chaque canal pris individuellement mais derrière l'ensemble du marketing payant. 
+--> Le panier moyen de 480€, très proche de la moyenne globale (482€), confirme que le trafic organique n'est ni de qualité supérieure ni inférieure au trafic payant.
+Cette part substantielle d'organique (45%) constitue un actif stratégique majeur réduisant la dépendance aux plateformes publicitaires. 
+--> Chaque euro non dépensé en publicité pour générer ces 216 615€ améliore directement la marge nette. 
