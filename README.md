@@ -2,8 +2,7 @@
 
 ## 🎯 Vue d'ensemble
 
-Cette étude analyse les données e-commerce d'un site sur la période avril-septembre 2025, couvrant 1000 commandes, 631 clients et 4 campagnes marketing à travers 5 parties indépendantes.
-
+Cette étude analyse les données e-commerce d'un site sur la période avril-septembre 2025.
 **Objectifs :**
 - Nettoyer et préparer les données sources
 - Analyser la performance produit et la répartition géographique
