@@ -72,13 +72,13 @@ On va considérer que l'état le plus récent est celui qui compte pour l'analys
 Pour ce faire, nous avons utilisé : 'ROW_NUMBER() OVER (PARTITION BY id ORDER BY updated_at DESC)'
 --> On partitionne par 'id' pour traiter chaque commande de manière indépendante
 --> On trie par 'updated_at DESC' pour avoir l'état le plus récent en premier 
---> Ce qui nous permet de garder uniquement la ligne avec rn=1 - donc 'The latest update'
+--> Ce qui nous permet de garder uniquement la ligne avec rn = 1 - donc 'The latest update'
 Cette déduplication nous fait donc passer de 2294 lignes à 1000 lignes, soit une réduction de 56%. 
 
 Pour vérifier que tout fonctionne correctement, j'ai retesté la commande 995 : elle apparaît bien avec status=shipped et updated_at=2025-04-22 11:30:28, ce qui est cohérent.
 
-En anticipation de la Question 5, la vue orders_clean a été créée à cette étape en intégrant directement les corrections de pays nécessaires (normalisation en majuscules, suppression des espaces, correction de "ED" en "DE"). 
---> Cette approche évite la duplication de code et garantit que la vue est immédiatement utilisable pour les analyses suivantes.
+En anticipation de la Question 5, la vue orders_clean a été créée à cette étape en intégrant directement les corrections de pays nécessaires 
+--> normalisation en majuscules, suppression des espaces, correction de "ED" en "DE".
 
 
 
@@ -114,7 +114,10 @@ Les corrections ont été intégrées directement dans la création de la vue or
 --> suppression des espaces avec TRIM(), 
 --> et correction explicite du code erroné "ED" vers "DE". 
 
-Cette approche garantit que la vue finale contient 100% de valeurs conformes au référentiel (FR, DE, IT, ES, BE).
+Par soucis de visualisation, j'ai procédé à l'identification des erreurs sur la table non-traitée 'orders' puisque nous avons déjà 'order_cleans' dans la question 3. 
+
+Ainsi, on garantit que la vue finale contient 100% de valeurs conformes au référentiel (FR, DE, IT, ES, BE).
+
 La distribution géographique finale montre un équilibre relatif entre les cinq pays : 
 - Espagne 21.5%
 - Allemagne 21.1%
