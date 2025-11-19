@@ -1,9 +1,9 @@
-product_id;product_name;pays_top_ventes;quantite_vendue
-H77;Notebook;DE;216
-B44;Cap;FR;210
-G88;Socks;FR;210
-C01;Dacker Mug;IT;198
-D22;Metal Bottle;ES;193
-F99;Sticker Pack;FR;178
-A12;Blue T-shirt;ES;174
-E13;Black Hoodie;DE;171
+product_id,product_name,category,quantite_totale_vendue,revenu_total,prix_moyen_vente,nb_clients_distincts,date_premiere_vente
+B44,Cap,Apparel,835,54648.84,65.32,178,2025-04-01
+D22,"Metal Bottle",Goodies,835,53999.27,64.81,183,2025-04-01
+C01,"Dacker Mug",Goodies,868,53996.26,60.77,185,2025-04-01
+G88,Socks,Apparel,835,53298.59,62.53,179,2025-04-01
+H77,Notebook,Stationery,809,52944.83,64.29,181,2025-04-01
+F99,"Sticker Pack",Accessories,796,52494.8,65.22,177,2025-04-01
+A12,"Blue T-shirt",Apparel,820,52062.59,63.8,180,2025-04-01
+E13,"Black Hoodie",Apparel,756,44511.4,60.46,169,2025-04-01
