@@ -129,7 +129,7 @@ Chaque partie dispose d'un document markdown complet dans le dossier `docs/` :
 - `partie_4_LTV.md` --> Cohortes mensuelles, évolution LTV, taux de rétention 
 - `partie_5_marketing.md` --> ROAS, CAC, attribution, performance par canal
 - `partie_6_visualisation.md` --> ROAS, CAC, attribution, performance par canal'
-- `partie_7_discussion_et_limites.md` --> Analyse critique, approche alternative, recommandations 
+- `partie_7_architecture.md` --> Architecture, optimization
 
 
 ---
