@@ -14,7 +14,7 @@
 .print "========================================"
 .print ""
 
-.print "Etape 1 : Verification de la presence de doublons"
+.print "Etape 1 : Verification de la présence de doublons"
 .print ""
 SELECT
     id,
@@ -164,7 +164,7 @@ SELECT DISTINCT
 FROM order_items;
 
 .print ""
-.print "Verification de l'operation"
+.print "Verification de l'opération"
 .print ""
 SELECT 'order_items_clean' as table_name, COUNT(*) as nb_lignes
 FROM order_items_clean;

@@ -14,7 +14,7 @@
 .print "========================================"
 .print ""
 .print "Comparaison montant commande vs charges bancaires"
-.print "Top 20 commandes avec les plus gros ecarts"
+.print "Top 25 commandes avec les plus gros ecarts"
 .print ""
 
 WITH order_amounts AS (
@@ -165,7 +165,7 @@ WITH order_amounts AS (
         o.customer_id,
         o.shipping_country,
         o.status,
-        ROUND(COALESCE(SUM(oi.quantity * oi.unit_price), 0), 2) AS montant_commande  -- COALESCE ajouté
+        ROUND(COALESCE(SUM(oi.quantity * oi.unit_price), 0), 2) AS montant_commande
     FROM orders_clean o
     LEFT JOIN order_items_clean oi ON o.id = oi.order_id
     GROUP BY o.id, o.customer_id, o.shipping_country, o.status

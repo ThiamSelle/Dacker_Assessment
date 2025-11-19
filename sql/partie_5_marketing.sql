@@ -91,6 +91,7 @@ WITH order_revenues AS (
         ROUND(COALESCE(SUM(oi.quantity * oi.unit_price), 0), 2) AS montant_commande
     FROM orders_clean o
     LEFT JOIN order_items_clean oi ON o.id = oi.order_id
+    WHERE o.status = 'shipped'
     GROUP BY o.id, o.customer_id, o.created_at
 ),
 first_orders AS (
@@ -98,6 +99,7 @@ first_orders AS (
         customer_id,
         MIN(created_at) AS date_premiere_commande
     FROM orders_clean
+    WHERE status = 'shipped'
     GROUP BY customer_id
 ),
 attributed_orders AS (
@@ -181,6 +183,7 @@ WITH order_revenues AS (
         ROUND(COALESCE(SUM(oi.quantity * oi.unit_price), 0), 2) AS montant_commande
     FROM orders_clean o
     LEFT JOIN order_items_clean oi ON o.id = oi.order_id
+    WHERE o.status = 'shipped'
     GROUP BY o.id, o.customer_id, o.created_at
 ),
 first_orders AS (
@@ -188,6 +191,7 @@ first_orders AS (
         customer_id,
         MIN(created_at) AS date_premiere_commande
     FROM orders_clean
+    WHERE status= 'shipped'
     GROUP BY customer_id
 ),
 attributed_orders AS (
@@ -272,6 +276,7 @@ first_orders AS (
         customer_id,
         MIN(created_at) AS date_premiere_commande
     FROM orders_clean
+    WHERE status = 'shipped'
     GROUP BY customer_id
 ),
 attributed_orders AS (
@@ -347,6 +352,7 @@ WITH order_revenues AS (
         ROUND(COALESCE(SUM(oi.quantity * oi.unit_price), 0), 2) AS montant_commande
     FROM orders_clean o
     LEFT JOIN order_items_clean oi ON o.id = oi.order_id
+    WHERE o.status = 'shipped'
     GROUP BY o.id, o.customer_id, o.created_at
 ),
 orders_with_attribution AS (
@@ -395,6 +401,7 @@ WITH order_revenues AS (
         ROUND(COALESCE(SUM(oi.quantity * oi.unit_price), 0), 2) AS montant_commande
     FROM orders_clean o
     LEFT JOIN order_items_clean oi ON o.id = oi.order_id
+    WHERE o.status = 'shipped'
     GROUP BY o.id, o.customer_id, o.created_at
 ),
 attribution_deduplicated AS (

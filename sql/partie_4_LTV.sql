@@ -22,6 +22,7 @@ WITH first_order_dates AS (
         customer_id,
         MIN(created_at) AS date_premiere_commande
     FROM orders_clean
+    WHERE status = 'shipped'
     GROUP BY customer_id
 )
 SELECT
@@ -37,6 +38,7 @@ SELECT
 FROM orders_clean o
 JOIN first_order_dates fod ON o.customer_id = fod.customer_id
 LEFT JOIN order_items_clean oi ON o.id = oi.order_id
+WHERE o.status = 'shipped'
 GROUP BY o.id, o.customer_id, o.created_at, o.status, o.shipping_country, fod.date_premiere_commande
 ORDER BY o.customer_id, o.created_at
 LIMIT 20;
@@ -63,6 +65,7 @@ WITH first_order_dates AS (
         MIN(created_at) AS date_premiere_commande,
         STRFTIME('%Y-%m', MIN(created_at)) AS cohorte_mois
     FROM orders_clean
+    WHERE status = 'shipped'
     GROUP BY customer_id
 ),
 orders_with_cohort AS (
@@ -79,6 +82,7 @@ orders_with_cohort AS (
     FROM orders_clean o
     JOIN first_order_dates fod ON o.customer_id = fod.customer_id
     LEFT JOIN order_items_clean oi ON o.id = oi.order_id
+    WHERE o.status = 'shipped'
     GROUP BY o.id, o.customer_id, o.created_at, fod.date_premiere_commande, fod.cohorte_mois
 ),
 ltv_by_cohort_and_month AS (
@@ -128,6 +132,7 @@ WITH first_order_dates AS (
         MIN(created_at) AS date_premiere_commande,
         STRFTIME('%Y-%m', MIN(created_at)) AS cohorte_mois
     FROM orders_clean
+    WHERE status = 'shipped'
     GROUP BY customer_id
 ),
 orders_with_cohort AS (
@@ -144,6 +149,7 @@ orders_with_cohort AS (
     FROM orders_clean o
     JOIN first_order_dates fod ON o.customer_id = fod.customer_id
     LEFT JOIN order_items_clean oi ON o.id = oi.order_id
+    WHERE o.status = 'shipped'
     GROUP BY o.id, o.customer_id, o.created_at, fod.date_premiere_commande, fod.cohorte_mois
 ),
 ltv_by_cohort_and_month AS (
