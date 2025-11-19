@@ -51,7 +51,7 @@ Dacker_Assessment/
 ├── sql/                              
 │   ├── exploration.sql
 │   ├── partie_1_ingestion.sql
-│   ├── partie_2_produit.sql
+│   ├── partie_2_produit.md
 │   ├── partie_3_reconciliation.sql
 │   ├── partie_4_LTV.sql
     ├── partie_5_marketing.sql
@@ -80,7 +80,7 @@ Dacker_Assessment/
 **Pour reproduire l'analyse :**
 1. Cloner le projet
 2. Exécuter `python src/import_data.py`
-3. Lancer les scripts SQL dans l'ordre
+3. Lancer les scripts SQL dans l'ordre 
 4. Comparer vos résultats avec les documents `docs/`
 5. Visualiser le dashboard : https://lookerstudio.google.com/reporting/135d21aa-48d2-4484-9e68-f92719eb5413.
 
@@ -122,14 +122,13 @@ J'ai choisi cette approche pour différente raisons:
 ## Documentation détaillée
 
 Chaque partie dispose d'un document markdown complet dans le dossier `docs/` :
-
-`partie_1_ingestion.md` --> Import, nettoyage, validation des données 
-`partie_2_produit.md` --> Performance produit, analyse géographique, top produits 
-`partie_3_reconciliation.md` --> Écarts de paiement, créances, analyse des impayés 
-`partie_4_LTV.md` --> Cohortes mensuelles, évolution LTV, taux de rétention 
-`partie_5_marketing.md` --> ROAS, CAC, attribution, performance par canal
-`partie_6_visualisation.md` --> ROAS, CAC, attribution, performance par canal'
-`partie_7_discussion_et_limites.md` --> Analyse critique, approche alternative, recommandations 
+- `partie_1_ingestion.md` --> Import, nettoyage, validation des données 
+- `partie_2_produit.md` --> Performance produit, analyse géographique, top produits 
+- `partie_3_reconciliation.md` --> Écarts de paiement, créances, analyse des impayés 
+- `partie_4_LTV.md` --> Cohortes mensuelles, évolution LTV, taux de rétention 
+- `partie_5_marketing.md` --> ROAS, CAC, attribution, performance par canal
+- `partie_6_visualisation.md` --> ROAS, CAC, attribution, performance par canal'
+- `partie_7_discussion_et_limites.md` --> Analyse critique, approche alternative, recommandations 
 
 
 ---
