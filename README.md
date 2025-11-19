@@ -45,9 +45,23 @@ Dacker_Assessment/
 │   ├── partie_2_produit.md
 │   ├── partie_3_reconciliation.md
 │   ├── partie_4_LTV.md
-    ├── partie_5_marketing.md
-    ├── partie_6_visualisation.md
+│   ├── partie_5_marketing.md
+│   ├── partie_6_visualisation.md
 │   └── partie_5_architecture.md
+│
+│
+│
+├── outputs/                             
+│   ├── exploration.txt
+│   ├── partie_1_ingestion.md
+│   ├── partie_2_produit.md
+│   ├── partie_3_reconciliation.md
+│   ├── partie_4_LTV.md
+│   ├── partie_5_marketing.md
+│   ├── partie_6_visualisation.md
+│   └── partie_5_architecture.md
+│
+│
 │
 ├── sql/                              
 │   ├── exploration.sql
@@ -61,7 +75,7 @@ Dacker_Assessment/
 ├── src/
 │   └── import_data.py                   
 │
-├── .gitignore
+├── .gitignore 
 └── README.md                           
 ```
 
